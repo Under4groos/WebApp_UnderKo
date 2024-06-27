@@ -6,5 +6,7 @@ namespace WebApp_UnderKo.Models
     {
         public static YoutubeClient youtube = new YoutubeClient();
         public static Cache CacheData = new Cache();
+        public static Log.Logger logger = new Log.Logger();
+
     }
 }

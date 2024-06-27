@@ -4,29 +4,22 @@ namespace WebApp_UnderKo.Models
 {
     public static class StartupServerOptions
     {
-#if DEBUG
-        public static void __debug()
-        {
-            Console.WriteLine("Loading StartupServerOptions");
-        }
 
-
-#endif
 
         public static async Task<bool> Init()
         {
-#if DEBUG
-            __debug();
-#endif      
+            G_.logger.NewLine("Loading StartupServerOptions");
 
 
 
-            await InputOutput.Read(@"C:\Users\UnderKo\Documents\Arduino\AnalogReadSerial\AnalogReadSerial.ino",
+            await InputOutput.ReadAsync(@"C:\Users\UnderKo\Documents\Arduino\AnalogReadSerial\AnalogReadSerial.ino",
                 (string result) =>
                 {
-                    Console.WriteLine($"{result}");
+
                 });
 
+
+            InputOutput.CreateFolders(G_.CacheData.PATH_WWWROOT, new[] { "files" });
 
 
 
