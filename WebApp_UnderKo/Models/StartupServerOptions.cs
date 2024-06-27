@@ -1,4 +1,6 @@
-﻿namespace WebApp_UnderKo.Models
+﻿using WebApp_UnderKo.Models.IO;
+
+namespace WebApp_UnderKo.Models
 {
     public static class StartupServerOptions
     {
@@ -15,7 +17,16 @@
         {
 #if DEBUG
             __debug();
-#endif
+#endif      
+
+
+
+            await InputOutput.Read(@"C:\Users\UnderKo\Documents\Arduino\AnalogReadSerial\AnalogReadSerial.ino",
+                (string result) =>
+                {
+                    Console.WriteLine($"{result}");
+                });
+
 
 
 

@@ -11,7 +11,7 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
         {
             try
             {
-                using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(test)))
+                using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(serialize_str)))
                 {
                     return (T)xmlSerializer.Deserialize(stream);
                 }
