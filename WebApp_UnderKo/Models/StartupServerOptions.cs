@@ -12,10 +12,10 @@ namespace WebApp_UnderKo.Models
 
 
 
-            await InputOutput.ReadAsync(@"C:\Users\UnderKo\Documents\Arduino\AnalogReadSerial\AnalogReadSerial.ino",
+            await InputOutput.PATH_BASE_LocalRead(@"Data\test.txt",
                 (string result) =>
                 {
-
+                    G_.logger.NewLine($"{result}");
                 });
 
 

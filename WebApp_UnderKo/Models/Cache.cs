@@ -7,7 +7,7 @@ namespace WebApp_UnderKo.Models
 
     public class Cache
     {
-
+        public string PATH_BASE = string.Empty;
         public string PATH_WWWROOT = string.Empty;
         public string PATH_WWWROOT_FILES = string.Empty;
         public string[] ImagesBack = { };
@@ -28,8 +28,10 @@ namespace WebApp_UnderKo.Models
 
         public void Reload()
         {
-            PATH_WWWROOT = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            PATH_BASE = Directory.GetCurrentDirectory();
+            PATH_WWWROOT = Path.Combine(PATH_BASE, "wwwroot");
             PATH_WWWROOT_FILES = Path.Combine(PATH_WWWROOT, "file");
+
             if (Directory.Exists(PATH_WWWROOT_FILES))
             {
                 string[] files___ = Directory.GetFiles(PATH_WWWROOT_FILES, "*.jpg");

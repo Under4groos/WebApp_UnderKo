@@ -32,9 +32,9 @@ namespace WebApp_UnderKo.Models.IO
             return false;
         }
 
-        public static async Task<bool> WWWROOT_LocalWriteAsync(string path, string data)
+        public static async Task<bool> PATH_BASE_LocalWriteAsync(string path, string data)
         {
-            string path_file = Path.Combine(G_.CacheData.PATH_WWWROOT, path);
+            string path_file = Path.Combine(G_.CacheData.PATH_BASE, path);
             return await WriteAsync(path_file, data);
         }
 
@@ -45,8 +45,9 @@ namespace WebApp_UnderKo.Models.IO
                 using (FileStream writeter = File.OpenWrite(path))
                 {
                     byte[] encodedText = Encoding.UTF8.GetBytes(data);
-                    await writeter.WriteAsync(encodedText, 0, encodedText.Length);
                     G_.logger.NewLine($"File write: {path}");
+                    await writeter.WriteAsync(encodedText, 0, encodedText.Length);
+
                     return true;
                 }
             }
@@ -59,9 +60,9 @@ namespace WebApp_UnderKo.Models.IO
 
         }
 
-        public static async Task<bool> WWWROOT_LocalRead(string path, Action<string> result)
+        public static async Task<bool> PATH_BASE_LocalRead(string path, Action<string> result)
         {
-            string path_file = Path.Combine(G_.CacheData.PATH_WWWROOT, path);
+            string path_file = Path.Combine(G_.CacheData.PATH_BASE, path);
             return await ReadAsync(path_file, result);
         }
 
@@ -72,9 +73,11 @@ namespace WebApp_UnderKo.Models.IO
             {
                 using (StreamReader reader = File.OpenText(path))
                 {
+
                     var fileText = await reader.ReadToEndAsync();
-                    result?.Invoke(fileText);
                     G_.logger.NewLine($"File read: {path}");
+                    result?.Invoke(fileText);
+
                     return true;
                 }
             }
