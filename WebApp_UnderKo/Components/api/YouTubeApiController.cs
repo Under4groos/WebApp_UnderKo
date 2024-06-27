@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp_UnderKo.Models;
 using WebApp_UnderKo.Models.Mvc.Result;
+using WebApp_UnderKo.Models.Serializator.Json;
 using WebApp_UnderKo.Models.YouTube;
 using YoutubeExplode.Videos;
 
+
 namespace WebApp_UnderKo.Components.api
 {
-    [Route("api/[controller]")]
+    [Route("api/YouTube")]
     [ApiController]
     public class YouTubeApiController : ControllerBase
     {
@@ -32,9 +35,9 @@ namespace WebApp_UnderKo.Components.api
 
             try
             {
+                YouTubeDownloaderLinks list_ = __get(link).Result;
 
-
-                return new TextResult(__get(link).Result);
+                return Content(new JsonSerializator<YouTubeDownloaderLinks>().SerializeObject(list_));
 
             }
             catch (Exception e)
