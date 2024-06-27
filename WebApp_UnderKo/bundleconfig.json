@@ -1,1 +1,15 @@
-﻿
+﻿[
+  {
+    "outputFileName": "wwwroot/css/zip_css_combine.css",
+    "inputFiles": [
+      "static/css/*.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/zip_scripts_combine.js",
+    "inputFiles": [
+      "static/scripts/*.js"
+    ]
+  }
+   
+]
