@@ -7,12 +7,12 @@ namespace WebApp_UnderKo.Models.Serializator.Json
         {
             try
             {
-                return (T)JsonConvert.DeserializeObject(serialize_str);
+                return JsonConvert.DeserializeObject<T>(serialize_str);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                return default;
+                G_.logger.NewLine(e.Message);
+                return default(T);
             }
         }
 
@@ -22,9 +22,9 @@ namespace WebApp_UnderKo.Models.Serializator.Json
             {
                 return JsonConvert.SerializeObject(obj, Formatting.Indented);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                G_.logger.NewLine(e.Message);
                 return JsonConvert.NaN;
             }
         }

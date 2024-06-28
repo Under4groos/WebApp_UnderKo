@@ -5,6 +5,7 @@ namespace WebApp_UnderKo.Models.IO
     public static class InputOutput
     {
 
+        private static Dictionary<string, string> _cache_file = new Dictionary<string, string>();
 
         public static bool CreateFolders(string base_path, string[] names)
         {
@@ -60,22 +61,33 @@ namespace WebApp_UnderKo.Models.IO
 
         }
 
-        public static async Task<bool> PATH_BASE_LocalRead(string path, Action<string> result)
+        public static async Task<bool> PATH_BASE_LocalRead(string path, Action<string> result, bool iscache = false)
         {
             string path_file = Path.Combine(G_.CacheData.PATH_BASE, path);
-            return await ReadAsync(path_file, result);
+            return await ReadAsync(path_file, result, iscache);
         }
 
-        public static async Task<bool> ReadAsync(string path, Action<string> result)
+        public static async Task<bool> ReadAsync(string path, Action<string> result, bool iscache = false)
         {
 
             if (File.Exists(path))
             {
+                if (_cache_file.ContainsKey(path) && iscache == true)
+                {
+                    result?.Invoke(_cache_file[path]);
+                    return true;
+                }
+
+
                 using (StreamReader reader = File.OpenText(path))
                 {
 
                     var fileText = await reader.ReadToEndAsync();
                     G_.logger.NewLine($"File read: {path}");
+
+                    if (!_cache_file.ContainsKey(path) && iscache == true)
+                        _cache_file.Add(path, fileText);
+
                     result?.Invoke(fileText);
 
                     return true;
