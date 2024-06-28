@@ -6,10 +6,18 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/js/zip_scripts_index.js",
+    "inputFiles": [
+      "static/scripts/site.js",
+
+      "static/scripts/signalr.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/zip_scripts_combine.js",
     "inputFiles": [
-      "static/scripts/*.js"
+      "static/scripts/project_js.js"
     ]
   }
-   
+
 ]

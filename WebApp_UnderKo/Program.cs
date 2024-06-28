@@ -1,22 +1,30 @@
 using WebApp_UnderKo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
+
+
 await StartupServerOptions.Init();
+
+
+var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-builder.Services.AddRazorPages();
-builder.Services.AddSignalR();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthorization();
+
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
     endpoints.MapControllers();
 });
+app.UseAuthorization();
 app.Run();
