@@ -25,7 +25,7 @@ namespace WebApp_UnderKo.Models
             if (!InputOutput.PATH_BASE_LocalRead(@"Data\__myprojects.html",
                 (string result) =>
                 {
-                    G_.logger.NewLine($"{result}");
+                    G_.logger.NewLine($"Read:\n{result}");
                 }, true).Result)
             {
                 XamlData xaml_obj = new XamlData();
@@ -36,23 +36,10 @@ namespace WebApp_UnderKo.Models
                 await InputOutput.PATH_BASE_LocalWriteAsync(@"Data\__myprojects.html", xaml_obj_string);
             };
 
-
-
-
-
-
-
-
             G_.git.Event_AppendItemsRepositories += () =>
             {
                 G_.logger.NewLine($"Repositories loaded. Count projects: {G_.git.GitHubReposList.Count}");
             };
-
-
-
-
-
-
 
             G_.git.Init_Profile("Under4groos");
             G_.git.GetRepositories("Under4groos");

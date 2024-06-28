@@ -1,0 +1,21 @@
+﻿.text-muted {
+    --bs-text-opacity: 1;
+    color: var(--foreground-color-font) !important;
+    stroke: var(--foreground-color-font);
+}
+.text-muted:hover {
+    color: var(--foreground-color-font-hover)
+
+}
+
+.pre {
+    font-size:20px;
+ 
+}
+
+
+.major-mono-display-regular {
+    font-family: "Major Mono Display", monospace;
+    font-weight: 400;
+    font-style: normal;
+}

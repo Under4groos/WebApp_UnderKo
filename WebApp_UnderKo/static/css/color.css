@@ -1,0 +1,10 @@
+﻿:root {
+    --background: #0b0c0e;
+    --header: #1516193f;
+    --border-line: #323440;
+    --foreground-color-font: #ebecf0;
+    --foreground-color-font-hover: #55aaff;
+    --opacity-svg-background: 0.01;
+    --gradient-dark: linear-gradient( to right, rgba(130, 130, 130, 1) 0%, rgba(0, 0, 0, 1) 100%, rgba(79, 79, 79, 1) 100% );
+    --blur:15px;
+}
