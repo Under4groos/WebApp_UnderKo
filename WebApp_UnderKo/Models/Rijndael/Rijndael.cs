@@ -28,6 +28,8 @@ namespace Rijndael256
         /// <returns>The Base64 encoded ciphertext.</returns>
         public static string Encrypt(string plaintext, KeySize keySize, string password = hex)
         {
+            if (password == null)
+                password = hex;
             return Encrypt(Encoding.UTF8.GetBytes(plaintext), keySize, password);
         }
 
@@ -136,6 +138,8 @@ namespace Rijndael256
         /// <returns>The plaintext.</returns>
         public static string Decrypt(string ciphertext, KeySize keySize, string password = hex)
         {
+            if (password == null)
+                password = hex;
             return Decrypt(Convert.FromBase64String(ciphertext), password, keySize);
         }
 
