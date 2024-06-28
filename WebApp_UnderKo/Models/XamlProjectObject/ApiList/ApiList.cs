@@ -1,4 +1,6 @@
-﻿namespace WebApp_UnderKo.Models.XamlProjectObject.ApiList
+﻿using Rijndael256;
+
+namespace WebApp_UnderKo.Models.XamlProjectObject.ApiList
 {
     public class ApiList
     {
@@ -10,6 +12,7 @@
             {
                 webApis.Add(new WebApi()
                 {
+                    Name = Rijndael.Encrypt(G_.Random.Next(0, 999999).ToString(), KeySize.Aes256),
                     URL = $"https://asd.asd/{i}",
                     reqQueries = new List<ReqQuery>()
                     {
