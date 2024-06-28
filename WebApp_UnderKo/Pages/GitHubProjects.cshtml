@@ -1,0 +1,120 @@
+﻿@page
+@model WebApp_UnderKo.Pages.GitHubProjectsModel
+@{
+    ViewData["Title"] = "Projects";
+    
+    string link_img = "https://i.pinimg.com/736x/e5/1d/d3/e51dd3666f19ba4994a44e66e66a7fd3.jpg";
+    int i = 0;
+}
+ <head>
+    @*  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="~/WebApplication_Razor.styles.css" asp-append-version="true" />
+     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+ </head>
+
+<style>
+    .card-custom {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-clip: border-box;
+    }
+
+    .backimg {
+        background-image: linear-gradient(to right, rgba(10,10,10, 0.81) 0 100%), url("@link_img");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<div class=" container mt-2">
+
+
+    <div class=" row row-cols-1 row-cols-sm-1 row-cols-md-1 g-2">
+
+        <div class="fs-5   rounded-3 bordeer-tlbr blured p-4">
+
+            <small class="text-body-secondary m-1 text-text-muted">
+                Список моих <strong class="fs-4">открытых </strong> or <strong class="fs-4">зыкрытых </strong> проектов.
+                Так получилось, да, да...
+            </small>
+        </div>
+
+        @foreach (var item in WebApp_UnderKo.Models.G_.git.GitHubReposList )
+        {
+            ++i;
+            <div class="col mb-3 mt-3 blured">
+
+
+
+                <div class="card-custom shadow-sm">
+                    <img src="@link_img" style="display:none; z-index:-1; -webkit-filter: blur(3px);position:absolute;background-size: unset;background-repeat: no-repeat; background-position: center; height:100%; width:100%; opacity: 0.1" />
+                    <div class="card-body rounded-3 bordeer-tlbr " style="background: var(--header)">
+                        <div class="d-flex gap-1 py-1">
+                            <p class="card-text @(item.@private ? "text-danger" : "text-success" ) fs-4">
+
+                                @item.name
+
+                            </p>
+
+
+
+
+
+                        </div>
+
+                        <div class="ms-0">
+                            <p class="card-text">
+                                @if (string.IsNullOrEmpty(item.description))
+                                {
+                                    @("[KOT\\KOD] Описание отсутствует")
+                                    ;
+                                }
+                                else
+                                {
+                                    @item.description
+                                    ;
+                                }
+
+
+                            </p>
+                            <div class="fs-5 m-1">
+                                [<small class="text-body-secondary m-1 text-muted">  @item.updated_at.ToLongDateString() </small>]
+                                <small class="text-body-secondary m-1 text-info">
+                                    @(string.IsNullOrEmpty(@item.language) ? "[null]" : @item.language)
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            @if (!item.@private)
+                            {
+                                <div class="btn-group">
+                                    <button type="button" onclick="window.open('@item.svn_url','_blank');"
+                                            class="btn btn-dark bordeer-tlbr m-1">
+                                        Show in GitHub
+                                    </button>
+                                </div>
+                            }
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -12,16 +11,21 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
         {
             try
             {
-                using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(serialize_str)))
+
+                using (var tr = new StringReader(serialize_str))
                 {
-                    return (T)xmlSerializer.Deserialize(stream);
+                    return (T)xmlSerializer.Deserialize(tr);
                 }
+                //using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(serialize_str)))
+                //{
+                //    return (T)xmlSerializer.Deserialize(stream);
+                //}
 
 
             }
             catch (Exception e)
             {
-                G_.logger.NewLine(e.Message);
+                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
                 return default(T);
             }
         }
@@ -43,7 +47,7 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
             }
             catch (Exception e)
             {
-                G_.logger.NewLine(e.Message);
+                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
                 return JsonConvert.NaN;
             }
         }

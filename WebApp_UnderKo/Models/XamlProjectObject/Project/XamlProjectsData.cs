@@ -2,7 +2,7 @@
 
 namespace WebApp_UnderKo.Models.XamlProjectObject.Project
 {
-    public class XamlData : base_XamlData
+    public class XamlProjectsData : base_XamlData
     {
         public List<XamlProject> Projects { get; set; } = new List<XamlProject>();
 

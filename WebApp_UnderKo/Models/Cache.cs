@@ -1,4 +1,6 @@
-﻿using WebApp_UnderKo.Models.YouTube;
+﻿using WebApp_UnderKo.Models.XamlProjectObject.ApiList;
+using WebApp_UnderKo.Models.XamlProjectObject.Project;
+using WebApp_UnderKo.Models.YouTube;
 
 
 
@@ -18,6 +20,9 @@ namespace WebApp_UnderKo.Models
         public List<YouTubeDownloaderLinks> YouTubeDownloaderLinks = new List<YouTubeDownloaderLinks>();
 
 
+
+        public ApiList apiList = new ApiList();
+        public XamlProjectsData xamlProjectsData = new XamlProjectsData();
 
 
         public Cache()

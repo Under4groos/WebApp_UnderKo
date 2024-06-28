@@ -28,24 +28,51 @@ namespace WebApp_UnderKo.Models.GitHub
         }
         public void GetRepositories(string username)
         {
-            for (int i = 0; i < 4; i++)
+            //for (int i = 1; i < 6; i++)
+            //{
+            //    WebReq.AsyncRequest($"https://api.github.com/search/repositories?q=user:{username}&sort=updated&per_page=30&page={i}", (string url, string result) =>
+            //    {
+            //        Models.GitHub.GitHubRepos data = new Models.Serializator.Json.JsonSerializator<Models.GitHub.GitHubRepos>().DeserializeObject(result);
+            //        if (data.items.Count > 0)
+            //        {
+            //            foreach (Item item in data.items)
+            //            {
+
+            //                GitHubReposList.Add(item);
+
+            //            }
+            //            Event_AppendItemsRepositories?.Invoke();
+            //        }
+
+            //    });
+
+            //}
+
+
+            WebReq.AsyncRequest($"https://api.github.com/users/{username}", (string url, string result) =>
             {
-                WebReq.AsyncRequest($"https://api.github.com/search/repositories?q=user:{username}&sort=updated&per_page=30&page={i}", (string url, string result) =>
-                {
-                    var data = new Models.Serializator.Json.JsonSerializator<Models.GitHub.GitHubRepos>().DeserializeObject(result);
-                    if (data.items.Count > 0)
-                    {
-                        foreach (Item item in data.items)
-                        {
 
-                            GitHubReposList.Add(item);
 
-                        }
-                        Event_AppendItemsRepositories?.Invoke();
-                    }
+            });
 
-                });
-            }
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    WebReq.AsyncRequest($"https://api.github.com/search/repositories?q=user:{username}&sort=updated&per_page=100&page={i}", (string url, string result) =>
+            //    {
+            //        Models.GitHub.GitHubRepos data = new Models.Serializator.Json.JsonSerializator<Models.GitHub.GitHubRepos>().DeserializeObject(result);
+            //        if (data.items.Count > 0)
+            //        {
+            //            foreach (Item item in data.items)
+            //            {
+
+            //                GitHubReposList.Add(item);
+
+            //            }
+            //            Event_AppendItemsRepositories?.Invoke();
+            //        }
+
+            //    });
+            //}
 
         }
 
