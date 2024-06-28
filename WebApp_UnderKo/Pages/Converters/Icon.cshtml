@@ -1,0 +1,38 @@
+﻿@page
+@model WebApp_UnderKo.Pages.Converters.IconModel
+@{
+}
+<div class="row">
+    <div class="col-md-12">
+
+        <form method="post" asp-controller="IconConverter" asp-action="SingleFileUpload"
+              enctype="multipart/form-data">
+
+
+            @if (Model.download_link.Length > 0)
+            {
+                <button onclick="window.open('/Converters');" class="btn btn-primary">
+                    Return
+                </button>
+
+                <div class="float-left mt-4">
+                    <img src="@Model.download_link" class="rounded p-3" alt="@Model.download_link" style="width:100%;" />
+
+                </div>
+                <button name="Download" onclick="window.open('@Model.download_link');" class="btn btn-primary mt-1">Download</button>
+            }
+            else
+            {
+                <input type="file" name="SingleFile" class="form-control" />
+
+                <div class="mt-1">
+                    <button type="submit" name="Upload" class="btn btn-primary">Convert to .ICO</button>
+
+                </div>
+
+
+            }
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@page
+@model WebApp_UnderKo.Pages.ConvertersModel
+@{
+    Dictionary<string, string> names_ = new Dictionary<string, string>()
+    {
+        { "Icon", ".ico" }
+    };
+}
+<h2>Converters</h2>
+<ul class="nav flex-column">
+    @foreach (var name in names_)
+    {
+        <li class="nav-item bg-dark m-1 rounded border border-dark">
+            <a class="nav-link text-muted " href="/Converters/@name.Key">@name.Value</a>
+        </li>
+    }
+</ul>
