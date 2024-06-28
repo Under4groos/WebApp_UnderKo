@@ -1,5 +1,0 @@
-await InputOutput.PATH_BASE_LocalRead(@"C:\Users\UnderKo\Documents\Arduino\AnalogReadSerial\AnalogReadSerial.ino",
-    (string result) =>
-    {
-
-    });
