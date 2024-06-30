@@ -76,7 +76,7 @@ namespace WebApp_UnderKo.Models
             G_.git.Init_Profile("Under4groos");
             G_.git.GetRepositories("Under4groos");
 
-            InputOutput.CreateFolders(G_.CacheData.PATH_WWWROOT, new[] { "files" });
+            InputOutput.CreateFolders(G_.CacheData.PATH_WWWROOT, G_.CacheData.OpenDirectories);
 
 
 

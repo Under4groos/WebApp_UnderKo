@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rijndael256;
-using System.Text.RegularExpressions;
 using WebApp_UnderKo.Models;
 
 namespace WebApp_UnderKo.Components.api
@@ -9,15 +8,7 @@ namespace WebApp_UnderKo.Components.api
     [ApiController]
     public class CryptController : ControllerBase
     {
-        public string FileEncryptName(FileInfo fio)
-        {
-            return FileEncryptName(fio.Name, fio.Extension);
 
-        }
-        public string FileEncryptName(string name, string Extension)
-        {
-            return Regex.Replace(Rijndael.Encrypt(name, KeySize.Aes256), "[\\W]+", "") + Extension;
-        }
 
         [HttpGet]
         public IActionResult Get(string mode, string data, string password = null)

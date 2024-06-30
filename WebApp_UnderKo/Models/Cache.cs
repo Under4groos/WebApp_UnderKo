@@ -13,6 +13,12 @@ namespace WebApp_UnderKo.Models
         public string PATH_WWWROOT = string.Empty;
         public string PATH_WWWROOT_FILES = string.Empty;
         public string[] ImagesBack = { };
+        public string[] OpenDirectories = new string[]
+           {
+                "uploads" , "video" , "file"
+           };
+
+
 
         public Dictionary<string, string> Images = new Dictionary<string, string>();
         public Dictionary<string, string> Sound = new Dictionary<string, string>();
