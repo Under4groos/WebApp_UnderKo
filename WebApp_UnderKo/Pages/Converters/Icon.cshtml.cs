@@ -10,7 +10,7 @@ namespace WebApp_UnderKo.Pages.Converters
 
             if (guid != null)
             {
-                download_link = $"/file?name={guid}";
+                download_link = $"/api/file?name={guid}";
             }
 
         }
