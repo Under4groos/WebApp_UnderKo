@@ -31,29 +31,46 @@ namespace WebApp_UnderKo.Components.api
         {
             return Regex.Replace(Rijndael.Encrypt(name, KeySize.Aes256), "[\\W]+", "") + Extension;
         }
-        public string ConvertImage(string fileimage, string newfilename, int Resize = 256)
+        public string ConvertImage(string fileimage, string newfilename, int W = 256, int H = 256)
         {
 
             try
             {
                 using (MagickImage image = new MagickImage(fileimage))
                 {
-                    if (image.Width > Resize || image.Height > Resize)
+                    if (image.Width > W || image.Height > H)
                     {
 
-                        image.Scale(Resize, Resize);
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"Resize Image\n ->New Size:{image.Width}x{image.Height}");
-                        Console.ForegroundColor = ConsoleColor.White;
+
+
+                        image.VirtualPixelMethod = VirtualPixelMethod.Transparent;
+                        image.Depth = 1;
+                        image.FilterType = FilterType.Quadratic;
+                        image.Transparent(MagickColor.FromRgb(0, 0, 0));
+                        image.Format = MagickFormat.Ico;
+                        image.Resize(W, H);
+
+
+
+                        G_.logger.NewLine($"Resize Image: {image.Width}x{image.Height}", Models.Log.ELoggerExtensions.Debug);
+
+
                     }
 
                     image.Write(newfilename);
+
+                }
+                if (System.IO.File.Exists(fileimage))
+                {
+                    System.IO.File.Delete(fileimage);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                return fileimage;
+                G_.logger.NewLine(e.Message, Models.Log.ELoggerExtensions.Error);
+
+                return e.Message;
             }
 
             return newfilename;
@@ -68,7 +85,8 @@ namespace WebApp_UnderKo.Components.api
             string filename__ = string.Empty;
             string directory = string.Empty;
             FileInfo fileInfo = new FileInfo(SingleFile.FileName);
-            G_.logger.NewLine($"File upload Serer: {SingleFile.FileName}");
+
+            G_.logger.NewLine($"File upload Server: {SingleFile.FileName}");
             if (ModelState.IsValid)
             {
                 if (SingleFile != null && SingleFile.Length > 0)
@@ -93,18 +111,17 @@ namespace WebApp_UnderKo.Components.api
                         catch (Exception e)
                         {
 
-                            G_.logger.NewLine(e.Message);
+                            G_.logger.NewLine(e.Message, Models.Log.ELoggerExtensions.Error);
                         }
 
                     }
 
                     fileInfo = new FileInfo(ConvertImage(fileInfo.FullName, fileInfo.FullName.Replace(fileInfo.Extension, ".ico")));
-                    filename__ = fileInfo.Name;
 
 
                 }
             }
-            return this.Redirect($"/Converters/Icon{(System.IO.File.Exists(fileInfo.FullName) ? $"?guid={filename__}" : "")}");
+            return this.Redirect($"/Converters/Icon{(System.IO.File.Exists(fileInfo.FullName) ? $"?guid={fileInfo.Name}" : "")}");
         }
     }
 }

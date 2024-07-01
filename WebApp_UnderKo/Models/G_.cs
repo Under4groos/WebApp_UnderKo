@@ -1,4 +1,5 @@
-﻿using WebApp_UnderKo.Models.GitHub;
+﻿using Microsoft.AspNetCore.StaticFiles;
+using WebApp_UnderKo.Models.GitHub;
 using WebApp_UnderKo.Models.Serializator.Json;
 using WebApp_UnderKo.Models.Serializator.Xaml;
 using WebApp_UnderKo.Models.XamlProjectObject.ApiList;
@@ -14,7 +15,7 @@ namespace WebApp_UnderKo.Models
         public static Cache CacheData = new Cache();
         public static Log.Logger logger = new Log.Logger();
         public static Git git = new Git();
-
+        public static FileExtensionContentTypeProvider FileExtension = new FileExtensionContentTypeProvider();
 
 
         #region SERIALOZATORS

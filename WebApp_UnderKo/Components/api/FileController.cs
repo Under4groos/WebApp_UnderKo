@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.IO.Storage;
 
 namespace WebApp_UnderKo.Components.api
 {
-    [Route("api/file")]
+    [Route("file")]
     [ApiController]
     public class FileController : ControllerBase
     {
@@ -21,18 +21,40 @@ namespace WebApp_UnderKo.Components.api
                     string ext = Path.GetExtension(___file);
 
 
-                    var fileProvider = new FileExtensionContentTypeProvider();
 
-                    if (!fileProvider.TryGetContentType(ext, out contentType))
+
+                    if (!G_.FileExtension.TryGetContentType(ext, out contentType))
                     {
                         G_.logger.NewLine($"Unable to find Content Type for file name {ext}.");
 
                     }
+                    G_.logger.NewLine($"[File][{contentType}]: {___file}");
                     return File(System.IO.File.ReadAllBytes(___file), contentType);
                 }
 
             }
+
             return this.Content($"File not found: \"{name}\"");
         }
+
+
+        // (new FileInfo(file__).Name)
+
+
+        public static List<StorageFile> Storage_GetFiles()
+        {
+            List<StorageFile> files = new List<StorageFile>();
+            foreach (var dir__ in G_.CacheData.OpenDirectories)
+            {
+                files.AddRange((
+                    from file__ in Directory.GetFiles(Path.Combine(G_.CacheData.PATH_WWWROOT, dir__))
+
+                    select new StorageFile(file__)
+                    ).ToArray());
+
+            }
+            return files;
+        }
+
     }
 }

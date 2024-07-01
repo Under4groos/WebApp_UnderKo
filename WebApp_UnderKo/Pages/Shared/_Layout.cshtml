@@ -107,6 +107,7 @@
                                 @foreach (var item in new (string, string)[] {
                                 ("Converters" , "Converters"),
                                 ("YouTubeDownloader" , "YouTubeDownloader"),
+                               
                                                     })
                                 {
                                     <li><a class=" dropdown-item-d text-muted" asp-page="/@item.Item1">@item.Item2</a></li>
@@ -118,7 +119,9 @@
                         @foreach (var item in new (string, string)[]
                         {
                         ("MyProjects", "Projects"),
+                        ("Storage" , "Storage"),
                         ("Donate" , "Donate"),
+                      
                         })
                         {
 

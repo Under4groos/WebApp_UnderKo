@@ -2,32 +2,50 @@
 @model WebApp_UnderKo.Pages.Converters.IconModel
 @{
 }
-<div class="row">
-    <div class="col-md-12">
-
+<div class="container my-2">
+    <div class="p-5 text-center">
         <form method="post" asp-controller="IconConverter" asp-action="SingleFileUpload"
               enctype="multipart/form-data">
 
 
             @if (Model.download_link.Length > 0)
             {
-                <button onclick="window.open('/Converters');" class="btn btn-primary">
-                    Return
-                </button>
 
-                <div class="float-left mt-4">
-                    <img src="@Model.download_link" class="rounded p-3" alt="@Model.download_link" style="width:100%;" />
+
+                <div>
+
+                    <a href="/Converters" target="_blank" class="btn btn-primary"
+                       style="width:100%;min-width:100px"> Return</a>
+                    <a href="@(Model.download_link)" target="_blank" class="btn btn-primary mt-2"
+                       style="width:100%;min-width:100px">Download</a>
 
                 </div>
-                <button name="Download" onclick="window.open('@Model.download_link');" class="btn btn-primary mt-1">Download</button>
+
+                <div class="row mb-3 text-center">
+                    <div class="col-md-3 themed-grid-col"></div>
+                    <div class="col-md-6 themed-grid-col">
+                        <img src="@Model.download_link" class="rounded p-3"
+                             alt="@Model.download_link" style="width:80%" />
+
+                    </div>
+                    <div class="col-md-3 themed-grid-col"></div>
+                </div>
+
+
+
+
+
+
             }
             else
             {
-                <input type="file" name="SingleFile" class="form-control" />
+                <div>
+                    <input type="file" name="SingleFile" class="form-control" />
 
-                <div class="mt-1">
-                    <button type="submit" name="Upload" class="btn btn-primary">Convert to .ICO</button>
+                    <div class="mt-1">
+                        <button type="submit" style="width:100%;min-width:100px" name="Upload" class="btn btn-primary">Convert to .ICO</button>
 
+                    </div>
                 </div>
 
 

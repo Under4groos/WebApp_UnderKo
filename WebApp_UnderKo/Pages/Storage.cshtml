@@ -1,0 +1,49 @@
+﻿@page
+@model WebApp_UnderKo.Pages.StorageModel
+@using WebApp_UnderKo.Components.api;
+@using WebApp_UnderKo.Models
+@using WebApp_UnderKo.Models.IO.Storage
+@{
+}
+
+<div class="container">
+    <div class="d-flex gap-2 py-1 bordeer-tlbr p-2 mb-3 rounded-3">
+
+        @foreach (var item in G_.CacheData.OpenDirectories)
+        {
+            <a>@item</a>
+        }
+    </div>
+    <ol class="list-group list-group-numbered">
+        @foreach (StorageFile file__ in FileController.Storage_GetFiles())
+        {
+
+            <li class="d-flex p-2 mb-2 justify-content-between align-items-start bordeer-tlbr  rounded-3">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">
+                        
+                        <a>File: @file__.Name</a>
+                    </div>
+                    <div class="list-group">
+                        <a>Directory: @file__.DirectoryName</a>
+                        <a>Type: @file__.Ext</a>
+
+                        <a class="link-info mt-2" href="/file?name=@file__.Name">Download file</a>
+                    </div>
+                   
+                    
+                </div>
+                
+            </li>
+           
+
+
+
+
+
+
+
+        }
+    </ol>
+
+</div>
