@@ -5,7 +5,7 @@ namespace WebApp_UnderKo.Models.GitHub
     public class Git
     {
         public Action Event_AppendItemsRepositories { get; set; }
-
+        public string API_KEY = string.Empty;
         public GitHubUserProfileData ProfileData { get; set; } = new GitHubUserProfileData();
         public List<Models.GitHub.Item> GitHubReposList = new List<Models.GitHub.Item>();
         public void Init_Profile(string username)

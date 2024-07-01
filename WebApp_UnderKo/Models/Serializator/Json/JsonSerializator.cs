@@ -24,7 +24,7 @@ namespace WebApp_UnderKo.Models.Serializator.Json
             }
             catch (Exception e)
             {
-                G_.logger.NewLine(e.Message);
+                G_.logger.NewLine($"[JSON]\n{e.Message}", Log.ELoggerExtensions.Error);
                 return JsonConvert.NaN;
             }
         }

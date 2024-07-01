@@ -6,6 +6,7 @@ namespace WebApp_UnderKo.Models.XamlProjectObject.Project.Base
     {
         [XmlAttribute]
         public string Name { get; set; } = string.Empty;
+        public int Downloads { get; set; } = 0;
         public string Description { get; set; } = string.Empty;
 
         public string GitHubLinkReleases { get; set; } = string.Empty;

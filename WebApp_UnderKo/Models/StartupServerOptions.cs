@@ -13,6 +13,7 @@ namespace WebApp_UnderKo.Models
             if (!InputOutput.PATH_BASE_LocalRead(@"Data\__githubapi.key.txt",
                 (string result) =>
                 {
+                    G_.git.API_KEY = result.Trim();
                     // null 
                 }, true).Result)
             {

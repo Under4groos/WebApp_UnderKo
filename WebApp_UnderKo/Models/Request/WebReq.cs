@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Text;
-using WebApp_UnderKo.Models.IO;
 
 namespace WebApp_UnderKo.Models.Request
 {
@@ -54,18 +53,55 @@ namespace WebApp_UnderKo.Models.Request
 
             if (url.StartsWith("https://github.com/") || url.StartsWith("https://api.github.com/"))
             {
-                await InputOutput.PATH_BASE_LocalRead(@"Data\__githubapi.key.txt",
-                (string rresult) =>
-                {
-                    request.Headers.Add("Authorization", "Bearer " + rresult);
+                request.Headers.Add("Authorization", "Bearer " + G_.git.API_KEY);
 
-                    request.GetResponseAsync(result);
-                }, true);
+                request.GetResponseAsync(result);
                 return;
             }
             request.GetResponseAsync(result);
 
         }
+        public static async Task<string> Request(string url, HttpMethods methods = HttpMethods.GET)
+        {
+            if (string.IsNullOrEmpty(url))
+                return string.Empty;
 
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                request.Method = methods.ToString();
+                request.Timeout = 20000;
+                request.Proxy = null;
+                request.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+                G_.logger.NewLine($"[{request.Method}]: {url}");
+
+                if (url.StartsWith("https://github.com/") || url.StartsWith("https://api.github.com/"))
+                {
+                    request.Headers.Add("Authorization", "Bearer " + G_.git.API_KEY);
+
+                    using (var responce = await request.GetResponseAsync())
+                    {
+                        using (var content = new MemoryStream())
+                        using (var responseStream = responce.GetResponseStream())
+                        {
+                            await responseStream.CopyToAsync(content);
+                            byte[] bytes__ = content.ToArray();
+
+                            return Encoding.UTF8.GetString(bytes__, 0, bytes__.Length);
+                        }
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
+            }
+            return string.Empty;
+
+        }
     }
 }

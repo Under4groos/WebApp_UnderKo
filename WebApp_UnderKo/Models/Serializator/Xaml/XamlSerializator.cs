@@ -47,7 +47,7 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
             }
             catch (Exception e)
             {
-                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
+                G_.logger.NewLine($"[XAML]\n{e.Message}", Log.ELoggerExtensions.Error);
                 return JsonConvert.NaN;
             }
         }

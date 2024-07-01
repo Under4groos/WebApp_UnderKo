@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.StaticFiles;
+using Rijndael256;
+using System.Text.RegularExpressions;
 using WebApp_UnderKo.Models.GitHub;
 using WebApp_UnderKo.Models.Serializator;
 using WebApp_UnderKo.Models.XamlProjectObject.ApiList;
@@ -10,6 +12,15 @@ namespace WebApp_UnderKo.Models
     public static class G_
     {
         public static Random Random = new Random();
+        public static string RandomGenerateHEX
+        {
+            get
+            {
+                return Regex.Replace(Rijndael.Encrypt(G_.Random.Next(0, 999999).ToString(), KeySize.Aes256),
+                    "[\\W\\+\\-\\.=,;\\[\\]]+",
+                    "");
+            }
+        }
 
         public static YoutubeClient youtube = new YoutubeClient();
         public static Cache CacheData = new Cache();
