@@ -2,7 +2,7 @@
 {
     public enum enumType
     {
-        Xaml,
+        xaml,
         json
     }
 }

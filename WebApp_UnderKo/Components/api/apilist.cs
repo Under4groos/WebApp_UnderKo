@@ -11,16 +11,16 @@ namespace WebApp_UnderKo.Components.api
         [HttpGet]
         public IActionResult Get(enumType type = enumType.json)
         {
-            switch (type)
-            {
-                case enumType.Xaml:
-                    return this.Content(G_.xaml_ApiList.SerializeObject(G_.CacheData.apiList));
-                case enumType.json:
-                    return this.Content(G_.json_ApiList.SerializeObject(G_.CacheData.apiList));
-                default:
-                    return this.Content("Error!");
-            }
+            return this.Content(G_.ApiList_Serializator.SerializeObject(G_.CacheData.apiList, type));
 
+
+        }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id, enumType type = enumType.json)
+        {
+            if (G_.CacheData.apiList.webApis.Count > 0 && id > 0 && id < G_.CacheData.apiList.webApis.Count)
+                return this.Content(G_.WebApi_Serializator.SerializeObject(G_.CacheData.apiList.webApis[id], type));
+            return this.Content($"Range Exception: Index was out of range.");
         }
     }
 }

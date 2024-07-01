@@ -1,0 +1,53 @@
+﻿@page
+@model WebApp_UnderKo.Pages.projectModel
+@{
+
+    async Task a_Button(string LinkDownload , string text)
+    {
+        <a href="@LinkDownload" class="btn bordeer-tlbr btn-dark m-1"> @text </a>
+    }
+}
+
+<div class=" container mt-2">
+    @if (string.IsNullOrEmpty(Model.NameProject))
+    {
+
+        @foreach (var item in WebApp_UnderKo.Models.G_.CacheData.xamlProjectsData.Projects)
+        {
+            <a>@item.Name</a>
+        }
+        // <div class=" row row-cols-1 row-cols-sm-1 row-cols-md-1 g-2">
+
+        //     @foreach (var item in WebApp_UnderKo.Models.G_.CacheData.xamlProjectsData.Projects)
+        //     {
+        //         <div class="container col-xxl-10 px-3 py-1 rounded-3 bordeer-tlbr blured">
+        //             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        //                 <div class="col-10 col-sm-8 col-lg-6">
+        //                     @if (item.Images.Count > 1)
+        //                     {
+        //                         <img src="@item.Images[0]" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+
+        //                     }
+        //                 </div>
+        //                 <div class="col-lg-6">
+        //                     <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@item.Name</h1>
+        //                     <p class="lead">@(string.IsNullOrEmpty(@item.Description) ? "Тут были котики" : @item.Description)</p>
+
+        //                     <div class="btn-group">
+        //                         <button type="button" onclick="window.open('/project?name=@item.Name');" class="btn btn-dark bordeer-tlbr m-1 mt-3">Перейти</button>
+
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+
+        //     }
+
+        // </div>
+
+    }
+    else
+    {
+
+    }
+</div>
