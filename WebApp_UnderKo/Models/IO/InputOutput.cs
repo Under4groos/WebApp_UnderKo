@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace WebApp_UnderKo.Models.IO
+﻿namespace WebApp_UnderKo.Models.IO
 {
     public static class InputOutput
     {
@@ -35,22 +33,16 @@ namespace WebApp_UnderKo.Models.IO
 
         public static async Task<bool> PATH_BASE_LocalWriteAsync(string path, string data)
         {
-            string path_file = Path.Combine(G_.CacheData.PATH_BASE, path);
-            return await WriteAsync(path_file, data);
+
+            return await WriteAsync(path, data);
         }
 
         public static async Task<bool> WriteAsync(string path, string data)
         {
             try
             {
-                using (FileStream writeter = File.OpenWrite(path))
-                {
-                    byte[] encodedText = Encoding.UTF8.GetBytes(data);
-                    G_.logger.NewLine($"File write: {path}");
-                    await writeter.WriteAsync(encodedText, 0, encodedText.Length);
-
-                    return true;
-                }
+                await File.WriteAllTextAsync(path, data);
+                return true;
             }
             catch (Exception)
             {
@@ -63,8 +55,8 @@ namespace WebApp_UnderKo.Models.IO
 
         public static async Task<bool> PATH_BASE_LocalRead(string path, Action<string> result, bool iscache = false)
         {
-            string path_file = Path.Combine(G_.CacheData.PATH_BASE, path);
-            return await ReadAsync(path_file, result, iscache);
+
+            return await ReadAsync(path, result, iscache);
         }
 
         public static async Task<bool> ReadAsync(string path, Action<string> result, bool iscache = false)
@@ -79,19 +71,18 @@ namespace WebApp_UnderKo.Models.IO
                 }
 
 
-                using (StreamReader reader = File.OpenText(path))
-                {
 
-                    var fileText = await reader.ReadToEndAsync();
-                    G_.logger.NewLine($"File read: {path}");
 
-                    if (!_cache_file.ContainsKey(path) && iscache == true)
-                        _cache_file.Add(path, fileText);
+                var fileText = await File.ReadAllTextAsync(path);
+                G_.logger.NewLine($"File read: {path}");
 
-                    result?.Invoke(fileText);
+                if (!_cache_file.ContainsKey(path) && iscache == true)
+                    _cache_file.Add(path, fileText);
 
-                    return true;
-                }
+                result?.Invoke(fileText);
+
+                return true;
+
             }
             else
             {

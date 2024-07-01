@@ -10,14 +10,14 @@ namespace WebApp_UnderKo.Models
         {
             /////////////////////////////////////////////////////
             ///
-            if (!InputOutput.PATH_BASE_LocalRead(@"Data\__githubapi.key.txt",
+            if (!InputOutput.PATH_BASE_LocalRead(@"__githubapi.key.txt",
                 (string result) =>
                 {
                     G_.git.API_KEY = result.Trim();
                     // null 
                 }, true).Result)
             {
-                await InputOutput.PATH_BASE_LocalWriteAsync(@"Data\__githubapi.key.txt", "<apikey>");
+                await InputOutput.PATH_BASE_LocalWriteAsync(@"__githubapi.key.txt", "<apikey>");
             };
 
             /////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ namespace WebApp_UnderKo.Models
 
             /////////////////////////////////////////////////////
             ///
-            if (!InputOutput.PATH_BASE_LocalRead(@"Data\__myprojects.html",
+            if (!InputOutput.PATH_BASE_LocalRead(@"__myprojects.html",
                 (string result) =>
                 {
                     G_.CacheData.xamlProjectsData = G_.ProjectsData_Serializator.xaml_XamlProject_Serializator.DeserializeObject(result);
@@ -34,12 +34,12 @@ namespace WebApp_UnderKo.Models
             {
                 G_.CacheData.xamlProjectsData.__init_null();
                 string xaml_obj_string = new XamlSerializator<XamlProjectsData>().SerializeObject(G_.CacheData.xamlProjectsData);
-                await InputOutput.PATH_BASE_LocalWriteAsync(@"Data\__myprojects.html", xaml_obj_string);
+                await InputOutput.PATH_BASE_LocalWriteAsync(@"__myprojects.html", xaml_obj_string);
             };
 
             /////////////////////////////////////////////////////
 
-            if (!InputOutput.PATH_BASE_LocalRead(@"Data\__apilist.html",
+            if (!InputOutput.PATH_BASE_LocalRead(@"__apilist.html",
                 (string result) =>
                 {
                     G_.CacheData.apiList = G_.ApiList_Serializator.DeserializeObject(result);
@@ -48,7 +48,7 @@ namespace WebApp_UnderKo.Models
             {
                 G_.CacheData.apiList.__init_null();
                 string xaml_obj_string = G_.ApiList_Serializator.SerializeObject(G_.CacheData.apiList);
-                await InputOutput.PATH_BASE_LocalWriteAsync(@"Data\__apilist.html", xaml_obj_string);
+                await InputOutput.PATH_BASE_LocalWriteAsync(@"__apilist.html", xaml_obj_string);
             };
 
             /////////////////////////////////////////////////////

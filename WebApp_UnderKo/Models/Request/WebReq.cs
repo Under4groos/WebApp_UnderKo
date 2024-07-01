@@ -22,18 +22,26 @@ namespace WebApp_UnderKo.Models.Request
             }
             return _r_Query;
         }
-        private static async void GetResponseAsync(this WebRequest request, Action<string, string> result)
+        private static async Task GetResponseAsync(this WebRequest request, Action<string, string> result)
         {
-            using (var responce = await request.GetResponseAsync())
+            try
             {
-                using (var content = new MemoryStream())
-                using (var responseStream = responce.GetResponseStream())
+                using (var responce = await request.GetResponseAsync())
                 {
-                    await responseStream.CopyToAsync(content);
-                    byte[] bytes__ = content.ToArray();
+                    using (var content = new MemoryStream())
+                    using (var responseStream = responce.GetResponseStream())
+                    {
+                        await responseStream.CopyToAsync(content);
+                        byte[] bytes__ = content.ToArray();
 
-                    result?.Invoke(request.RequestUri.AbsolutePath, Encoding.UTF8.GetString(bytes__, 0, bytes__.Length));
+                        result?.Invoke(request.RequestUri.AbsolutePath, Encoding.UTF8.GetString(bytes__, 0, bytes__.Length));
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+
+                G_.logger.NewLine($"{request.RequestUri.AbsolutePath}\n{e.Message}", Log.ELoggerExtensions.Error);
             }
         }
 
@@ -53,12 +61,14 @@ namespace WebApp_UnderKo.Models.Request
 
             if (url.StartsWith("https://github.com/") || url.StartsWith("https://api.github.com/"))
             {
+                if (G_.git.API_KEY.Length < 30)
+                    return;
                 request.Headers.Add("Authorization", "Bearer " + G_.git.API_KEY);
 
-                request.GetResponseAsync(result);
+                await request.GetResponseAsync(result);
                 return;
             }
-            request.GetResponseAsync(result);
+            await request.GetResponseAsync(result);
 
         }
         public static async Task<string> Request(string url, HttpMethods methods = HttpMethods.GET)
