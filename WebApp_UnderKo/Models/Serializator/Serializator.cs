@@ -17,12 +17,12 @@ namespace WebApp_UnderKo.Models.Serializator
                 {
                     case enumType.xaml:
                         return xaml_XamlProject_Serializator.DeserializeObject(serialize_str);
-                        break;
+
                     case enumType.json:
                         return json_XamlProject_Serializator.DeserializeObject(serialize_str);
 
                     default:
-                        return default(T);
+                        return default;
                 }
 
 
@@ -30,7 +30,7 @@ namespace WebApp_UnderKo.Models.Serializator
             catch (Exception e)
             {
                 G_.logger.NewLine(e.Message);
-                return default(T);
+                return default;
             }
         }
 

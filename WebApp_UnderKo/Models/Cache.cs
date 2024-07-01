@@ -15,7 +15,7 @@ namespace WebApp_UnderKo.Models
         public string[] ImagesBack = { };
         public string[] OpenDirectories = new string[]
            {
-                "uploads" , "video" , "file"
+                "uploads" , "video" , "file" , "img"
            };
 
 

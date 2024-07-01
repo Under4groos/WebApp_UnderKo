@@ -47,7 +47,7 @@ namespace WebApp_UnderKo.Components.api
             foreach (var dir__ in G_.CacheData.OpenDirectories)
             {
                 files.AddRange((
-                    from file__ in Directory.GetFiles(Path.Combine(G_.CacheData.PATH_WWWROOT, dir__))
+                    from file__ in Directory.GetFiles(Path.Combine(G_.CacheData.PATH_WWWROOT, dir__), "*.*", SearchOption.AllDirectories)
 
                     select new StorageFile(file__)
                     ).ToArray());
