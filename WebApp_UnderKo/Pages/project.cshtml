@@ -16,12 +16,30 @@
         // http://localhost:7076/file?name=smdcompile/smdcompile_1.png
         int mar = -5;
         <div style="position: absolute; left: @(mar)px; right: @(mar)px; top: @(mar)px; bottom: @(mar)px;
-                                                  background-image: url('/file?name=@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
+                                                          background-image: url('/file?name=@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
     }
 
-    
+    async Task YouTubeEmbed(string id)
+    {
+        <div class="col-md-4">
+            <div class="card mb-2" style="background: transparent">
+                <iframe class="card-img-top" style=" width: 100%; display: block;" src="https://www.youtube.com/embed/@(id)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    }
 
+    async Task Fu(string name, string descr)
+    {
+        <div class="col-md-4 col-12" data-cue="slideInLeft" data-show="true" style="animation-name: slideInLeft; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+            <div class="d-flex flex-column gap-4">
 
+                <div>
+                    <h4 class="mb-2">@name</h4>
+                    <p>@descr</p>
+                </div>
+            </div>
+        </div>
+    }
 }
 
 <div class="container mt-2 pb-2">
@@ -33,7 +51,7 @@
         {
             <div class="bg-image position-relative bordeer-tlbr rounded-3 overflow-hidden  text-center bg-body-tertiary mb-3">
                 @{
-                    await BackImage(project.Images.FirstOrDefault<string>(string.Empty) );
+                    await BackImage(project.Images.FirstOrDefault<string>(string.Empty));
                 }
 
 
@@ -59,9 +77,9 @@
     }
     else
     {
-        
+
         @if (Model.project.Images.Count > 0)
-           await BackImage(Model.project.Images[0]);
+            await                                 BackImage(Model.project.Images[0]);
         <div class="px-4 mt-5 text-center">
 
             <h1 class="display-5 fw-bold text-body-emphasis">@Model.project.Name</h1>
@@ -85,9 +103,88 @@
                     </p>
                 </div>
             }
-            
-        </div>
 
+        </div>
+        <section class=" py-lg-1 py-1 p-1 mb-3">
+            <div class="container my-lg-7 mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-1 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                            <h2 class="mb-0">Screenshots</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container">
+
+                <div class="row mt-2" id="li_images">
+
+                    @foreach (var item in Model.project.Images)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-2" style="background: transparent">
+                                <img src="/img/@(item)" class="card-img-top" style=" width: 100%; display: block;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="...">
+                            </div>
+                        </div>
+                    }
+                   
+                     
+
+
+
+                </div>
+            </div>
+
+            
+            @if (Model.project.YouTubeLinks.Count > 0)
+            {
+                <div class="container my-lg-7 mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-1 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                <h2 class="mb-0">Video</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container">
+                    <div class="row mt-2">
+                        @foreach (var item in Model.project.YouTubeLinks)
+                        {
+                            await YouTubeEmbed(item);
+                        }
+                    </div>
+                </div>
+            }
+
+
+
+
+
+            <div class=" container my-lg-7">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-5 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                            <h2 class="mb-0">Достоинства программы</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        @foreach (var item in Model.project.Features)
+                        {
+                            await Fu(item.Text, item.Description);
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
 
     }
 </div>

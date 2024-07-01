@@ -1,8 +1,6 @@
-﻿using WebApp_UnderKo.Models.XamlProjectObject.Project.Base;
-
-namespace WebApp_UnderKo.Models.XamlProjectObject.Project
+﻿namespace WebApp_UnderKo.Models.XamlProjectObject.Project
 {
-    public class Button : base_XamlData
+    public class Button
     {
 
         public string Text { get; set; } = string.Empty;

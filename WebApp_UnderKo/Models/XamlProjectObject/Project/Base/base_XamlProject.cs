@@ -15,5 +15,6 @@ namespace WebApp_UnderKo.Models.XamlProjectObject.Project.Base
 
         public List<string> YouTubeLinks { get; set; } = new List<string>();
 
+        public object JSON_OBJECT_GIT = null;
     }
 }

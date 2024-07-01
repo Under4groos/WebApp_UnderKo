@@ -11,9 +11,13 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
         {
             try
             {
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+
 
                 using (var tr = new StringReader(serialize_str))
                 {
+
                     return (T)xmlSerializer.Deserialize(tr);
                 }
                 //using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(serialize_str)))
@@ -29,7 +33,32 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
                 return default(T);
             }
         }
+        public T DeserializeObjectFile(string serialize_str)
+        {
+            try
+            {
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
 
+
+                using (var tr = new StreamReader(serialize_str))
+                {
+
+                    return (T)xmlSerializer.Deserialize(tr);
+                }
+                //using (Stream stream = new MemoryStream(Encoding.ASCII.GetBytes(serialize_str)))
+                //{
+                //    return (T)xmlSerializer.Deserialize(stream);
+                //}
+
+
+            }
+            catch (Exception e)
+            {
+                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
+                return default(T);
+            }
+        }
         public string SerializeObject(T obj)
         {
 

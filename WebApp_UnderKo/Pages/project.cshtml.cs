@@ -30,7 +30,41 @@ namespace WebApp_UnderKo.Pages
                 BUTTONS_TOP = project.ButtonsTop;
 
                 if (project.Downloads == 0 && !string.IsNullOrEmpty(project.GitHubLinkReleases))
-                    project.Downloads = GitApiController.__GetProjectCountDownload(project.GitHubLinkReleases).Result;
+                {
+                    dynamic? obj = await GitApiController.__GetProject(project.GitHubLinkReleases);
+
+                    if (obj != null)
+                        if (obj[0] != null)
+                        {
+
+                            string url_zip = obj[0]["assets"][0]["browser_download_url"];
+
+                            for (int i = 0; i < BUTTONS_TOP.Count; i++)
+                            {
+                                BUTTONS_TOP[i].Command = BUTTONS_TOP[i].Command.Trim();
+                                if (BUTTONS_TOP[i].Command == "_LINK_GIT_")
+                                    BUTTONS_TOP[i].Command = $"window.open('{url_zip}','_blank');";
+                            }
+                            //foreach (var item in BUTTONS_TOP)
+                            //{
+                            //    item.Command.Replace("_LINK_GIT_", url_zip);
+                            //}
+
+                            foreach (var asset in obj)
+                            {
+
+                                foreach (var item in asset["assets"])
+                                {
+                                    project.Downloads += (int)item["download_count"];
+
+                                }
+                            }
+
+                        }
+
+
+                }
+
 
             }
 

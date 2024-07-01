@@ -25,34 +25,41 @@ namespace WebApp_UnderKo.Components.api
         }
         public static async Task<int> __GetProjectCountDownload(string project)
         {
-            string json_txt = WebReq.Request(Regex.Replace(project, "(\n|\t| )", "")).Result;
+            string json_txt = await WebReq.Request(Regex.Replace(project, "(\n|\t| )", ""));
             if (string.IsNullOrEmpty(json_txt))
             {
                 return 0;
             }
             int download_count = 0;
             dynamic json_obj = JsonConvert.DeserializeObject(json_txt);
-            if (json_obj[0] != null)
-            {
-
-
-                string time_ = (string)json_obj[0]["published_at"];
-                var tt = time_.Split(' ');
-
-                foreach (var asset in json_obj)
+            if (json_obj != null)
+                if (json_obj[0] != null)
                 {
-
-                    foreach (var item in asset["assets"])
+                    foreach (var asset in json_obj)
                     {
-                        download_count += (int)item["download_count"];
 
+                        foreach (var item in asset["assets"])
+                        {
+                            download_count += (int)item["download_count"];
+
+                        }
                     }
-                }
 
-            }
+                }
 
 
             return download_count;
+        }
+        public static async Task<object?> __GetProject(string project)
+        {
+            string json_txt = await WebReq.Request(Regex.Replace(project, "(\n|\t| )", ""));
+            if (string.IsNullOrEmpty(json_txt))
+            {
+                return 0;
+            }
+
+            return JsonConvert.DeserializeObject(json_txt);
+
         }
     }
 }

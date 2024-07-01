@@ -33,61 +33,65 @@
 
 <div class="container">
 
-    @foreach (var item in WebApp_UnderKo.Models.G_.CacheData.apiList.webApis)
+    @if (WebApp_UnderKo.Models.G_.CacheData.apiList != null && WebApp_UnderKo.Models.G_.CacheData.apiList.webApis != null)
     {
-        name_ = Regex.Replace(item.Name, "[\\W/+-=]+", "");
+        @foreach (var item in WebApp_UnderKo.Models.G_.CacheData.apiList.webApis)
+        {
+            name_ = Regex.Replace(item.Name, "[\\W/+-=]+", "");
 
-        <div class="accordion" id="@(name_)">
+            <div class="accordion" id="@(name_)">
 
-            <div class="blured bordeer-tlbr rounded-3 mb-3">
-                <h2 class="accordion-header">
-                    <button class="accordion-button bordeer-tlbr-bottom text-muted"
-                            style="background-color:transparent" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#@(name_)collapseOne"
-                            aria-expanded="fl" aria-controls="@(name_)collapseOne">
-                        @item.Name
-                    </button>
+                <div class="blured bordeer-tlbr rounded-3 mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bordeer-tlbr-bottom text-muted"
+                                style="background-color:transparent" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#@(name_)collapseOne"
+                                aria-expanded="fl" aria-controls="@(name_)collapseOne">
+                            @item.Name
+                        </button>
 
-                </h2>
-                @* collapse *@
-                <div id="@(name_)collapseOne" class="accordion-collapse " data-bs-parent="#@(name_)">
-                    <div class="accordion-body">
-                        <div class="bordeer-tlbr p-3 rounded-3">
-                            <code style="background:var(--header)" type="text" class="text-muted">
-                                @(item.URL)
-                            </code>
-                        </div>
-                       @*  <div class="p-3">
-                            
-                            <div class="mt-2 ">
+                    </h2>
 
-                                @foreach (var q in item.reqQueries)
-                                {
-                                    <div class="row mb-3 bordeer-tlbr rounded-3">
-                                        <div class="col-md-4 themed-grid-col">
-                                            <p class="text-muted">@q.Name</p>
-                                        </div>
-                                        <div class="col-md-4 themed-grid-col">
-                                            <p class="text-muted">@q.Parametr</p>
-                                        </div>
-                                        <p class="text-muted">@q.Description</p>
-                                    </div>
-
-                                }
+                    <div id="@(name_)collapseOne" class="accordion-collapse " data-bs-parent="#@(name_)">
+                        <div class="accordion-body">
+                            <div class="bordeer-tlbr p-3 rounded-3">
+                                <code style="background:var(--header)" type="text" class="text-muted">
+                                    @(item.URL)
+                                </code>
                             </div>
 
                         </div>
- *@
-
-
-
                     </div>
                 </div>
-            </div>
 
+
+            </div>
+        }
+
+    }
+    else
+    {
+        <h1>Навернулась шаурма</h1>
+        <h2 class="ms-lg-2">Усе, приехзали, сайт сломалься </h2>
+        <h3 class="ms-lg-5">Шаурvа! Шаурvvmaа, мершгнисьб!</h3>
+        <h4>о нет... ее селюииыфв ббюю ю....... </h4>
+
+        <div class="ms-lg-5">
+            <h4>памаги </h4>
+            <h5 class="ms-lg-5">... те </h5>
+        </div>
+
+
+        <div class="ms-lg-4 mt-5">
+            <h4>Смерть от черезмерной мастурбации... </h4>
+             
+        </div>
+        <div class="ms-lg-5 mt-2">
+            <h6>By UnderKo</h6>
 
         </div>
     }
+
 </div>
 
 @* <div class="container">
