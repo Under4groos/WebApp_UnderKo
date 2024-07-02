@@ -5,6 +5,9 @@
 
         public string URL { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public List<ReqQuery> reqQueries { get; set; } = new List<ReqQuery>();
+        public string Description { get; set; } = string.Empty;
+        public List<string> reqQueries { get; set; } = new List<string>();
+
+
     }
 }

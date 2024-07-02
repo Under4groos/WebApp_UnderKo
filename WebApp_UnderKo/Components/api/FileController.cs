@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp_UnderKo.Models;
 using WebApp_UnderKo.Models.IO.Storage;
+using WebApp_UnderKo.Models.RazorPage;
 
 namespace WebApp_UnderKo.Components.api
 {
@@ -11,6 +12,7 @@ namespace WebApp_UnderKo.Components.api
         [HttpGet]
         public IActionResult Get(string name)
         {
+            this.Init();
             string ___file;
             string contentType = "text/html";
             foreach (string OpenDir_ in G_.CacheData.OpenDirectories)
@@ -38,7 +40,7 @@ namespace WebApp_UnderKo.Components.api
         }
 
 
-        // (new FileInfo(file__).Name)
+
 
 
         public static List<StorageFile> Storage_GetFiles()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rijndael256;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.RazorPage;
 
 namespace WebApp_UnderKo.Components.api
 {
@@ -13,6 +14,7 @@ namespace WebApp_UnderKo.Components.api
         [HttpGet]
         public IActionResult Get(string mode, string data, string password = null)
         {
+            this.Init();
             //// http://localhost:7076/api/crypt?mode=encrypt&data=12222222&password=1sdfdsf
             try
             {

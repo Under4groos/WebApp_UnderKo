@@ -42,7 +42,7 @@ namespace WebApp_UnderKo.Models
             if (!InputOutput.PATH_BASE_LocalRead(@"__apilist.html",
                 (string result) =>
                 {
-                    G_.CacheData.apiList = G_.ApiList_Serializator.DeserializeObject(result);
+                    G_.CacheData.apiList = G_.ApiList_Serializator.DeserializeObject(result, Serializator.enumType.xaml);
 
                 }, true).Result)
             {

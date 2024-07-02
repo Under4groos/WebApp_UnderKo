@@ -15,7 +15,7 @@
 }
 
 
-<div class="m-3">
+<div class="m-3 pb-3">
     <div width="100%" class="pb-3 blured p-3 bordeer-tlbr rounded-3">
         <form method="post">
             <h4>Link YouTube</h4>
@@ -27,13 +27,13 @@
     @if (Model.YouTubeDownloaderLinks_.objAudioStreamInfos.Count > 0)
     {
         <div class="mt-2 blured p-3 bordeer-tlbr rounded-3">
-
+            <div class="mb-3">
+                <h4>MuxedStream</h4>
+            </div>
 
             @foreach (var ver in Model.YouTubeDownloaderLinks_.objMuxedStreamInfos)
             {
-
                 <div class="accordion" id="@(count__)">
-
                     <div class="blured bordeer-tlbr rounded-3 mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button bordeer-tlbr-bottom text-muted"
@@ -61,25 +61,21 @@
                                     <div class="bordeer-tlbr rounded-3 m-1">
                                         <a class="nav-link text-muted" target="_blank" href="@ver.Url">Download</a>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             }
         </div>
-
-
         <div class="mt-2 blured p-3 bordeer-tlbr rounded-3">
 
-
+            <div class="mb-3">
+                <h4>AudioStream</h4>
+            </div>
             @foreach (var ver in Model.YouTubeDownloaderLinks_.objAudioStreamInfos)
             {
-
                 <div class="accordion" id="@(count__)">
-
                     <div class="blured bordeer-tlbr rounded-3 mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button bordeer-tlbr-bottom text-muted"
@@ -93,12 +89,9 @@
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     @{
-
-
                                         await Text("Size: " + ver.Size);
                                         await Text("Bitrate: " + ver.Bitrate);
                                         await Text("AudioCodec: " + ver.AudioCodec);
-
                                         count__++;
                                     }
                                 </ul>
@@ -121,6 +114,9 @@
 
         <div class="mt-2 blured p-3 bordeer-tlbr rounded-3">
 
+            <div class="mb-3">
+                <h4>VideoStream</h4>
+            </div>
 
             @foreach (var ver in Model.YouTubeDownloaderLinks_.objVideoStreamInfos)
             {

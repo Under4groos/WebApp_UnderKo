@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp_UnderKo.Models;
 using WebApp_UnderKo.Models.Mvc.Result;
+using WebApp_UnderKo.Models.RazorPage;
 using WebApp_UnderKo.Models.Serializator.Json;
 using WebApp_UnderKo.Models.YouTube;
 using YoutubeExplode.Videos;
@@ -8,7 +9,7 @@ using YoutubeExplode.Videos;
 
 namespace WebApp_UnderKo.Components.api
 {
-    [Route("api/YouTube")]
+    [Route("api/YouTubeApi")]
     [ApiController]
     public class YouTubeApiController : ControllerBase
     {
@@ -17,6 +18,7 @@ namespace WebApp_UnderKo.Components.api
         [HttpGet()]
         public ActionResult Get(string link = null)
         {
+            this.Init();
             if (string.IsNullOrEmpty(link))
                 return new TextResult(new objError($"Processing error", "Link length: 0"));
 

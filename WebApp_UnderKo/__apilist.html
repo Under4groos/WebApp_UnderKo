@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-16"?>
-<ApiList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ApiList
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
   <webApis>
     <WebApi>
-      <URL>https://asd.asd/0</URL>
-      <Name>v94HUYDujxQqx650MsaGzO5WBxzz6g/XIyQqD7fz1xs=</Name>
+      <URL>https://underko.ru/api/YouTubeApi?link=https://www.youtube.com/watch?v=X3DCRltnN-g</URL>
+      <Name>YouTubeApi</Name>
+      <Description></Description>
       <reqQueries>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 0</Parametr>
-          <Description> asdasd 0</Description>
-        </ReqQuery>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 0</Parametr>
-          <Description> asdasd 0</Description>
-        </ReqQuery>
+        <string>string link</string>
       </reqQueries>
     </WebApi>
+    
     <WebApi>
-      <URL>https://asd.asd/1</URL>
-      <Name>k0hhSH8wG67eKLJoSgQZZvPevUIUbuzzdG5Y4qt3B8E=</Name>
+      <URL>https://underko.ru/api/projectlist</URL>
+      <Name>Project list</Name>
+      <Description></Description>
       <reqQueries>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 1</Parametr>
-          <Description> asdasd 1</Description>
-        </ReqQuery>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 1</Parametr>
-          <Description> asdasd 1</Description>
-        </ReqQuery>
+        <string>string type (xaml\json)</string>
+        <string>int ../number</string>
       </reqQueries>
     </WebApi>
+
     <WebApi>
-      <URL>https://asd.asd/2</URL>
-      <Name>1/Dd005kFuhtmbMpR1eFQU3dnTQfuQRrUx4bwo5LJ+A=</Name>
+      <URL>https://underko.ru/api/crypt</URL>
+      <Name>Crypt</Name>
+      <Description></Description>
       <reqQueries>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 2</Parametr>
-          <Description> asdasd 2</Description>
-        </ReqQuery>
-        <ReqQuery Name="asd">
-          <Parametr>asdasdsa 2</Parametr>
-          <Description> asdasd 2</Description>
-        </ReqQuery>
+        <string>string mode (encrypt\decrypt) </string>
+        <string>string data</string>
+        <string>string password</string>
       </reqQueries>
     </WebApi>
+
+    
   </webApis>
 </ApiList>

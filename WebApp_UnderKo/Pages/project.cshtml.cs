@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApp_UnderKo.Components.api;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.RazorPage;
 using WebApp_UnderKo.Models.XamlProjectObject.Project;
 
 namespace WebApp_UnderKo.Pages
@@ -14,8 +15,7 @@ namespace WebApp_UnderKo.Pages
         public async Task<IActionResult> OnGet(string name = "", bool reopen = false)
         {
 
-            if (reopen)
-                await Models.StartupServerOptions.InitFiles();
+            this.Init();
 
             NameProject = name;
 

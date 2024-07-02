@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebApp_UnderKo.Components.api;
 using WebApp_UnderKo.Models.RazorPage;
 using WebApp_UnderKo.Models.YouTube;
 
 namespace WebApp_UnderKo.Pages
 {
-    public class YouTubeDownloaderModel : base_CheckPage
+    public class YouTubeDownloaderModel : PageModel
     {
         public YouTubeDownloaderLinks YouTubeDownloaderLinks_ = new YouTubeDownloaderLinks();
         public string Link { get; set; }

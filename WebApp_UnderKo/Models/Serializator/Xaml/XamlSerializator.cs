@@ -11,8 +11,7 @@ namespace WebApp_UnderKo.Models.Serializator.Xaml
         {
             try
             {
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
+
 
 
                 using (var tr = new StringReader(serialize_str))

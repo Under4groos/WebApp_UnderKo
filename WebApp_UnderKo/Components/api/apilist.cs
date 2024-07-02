@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.RazorPage;
 using WebApp_UnderKo.Models.Serializator;
 
 namespace WebApp_UnderKo.Components.api
@@ -11,6 +12,7 @@ namespace WebApp_UnderKo.Components.api
         [HttpGet]
         public IActionResult Get(enumType type = enumType.json)
         {
+            this.Init();
             return this.Content(G_.ApiList_Serializator.SerializeObject(G_.CacheData.apiList, type));
 
 

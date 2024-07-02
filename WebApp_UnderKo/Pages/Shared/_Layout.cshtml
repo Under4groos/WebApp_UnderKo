@@ -41,7 +41,7 @@
 </head>
 
 @{
-    async Task BackImage(string url, double opacity = 0.5, int blur = 10)
+    async Task BackImage(string url, double opacity = 0.8, int blur = 5)
     {
         // http://localhost:7076/file?name=smdcompile/smdcompile_1.png
         int mar = 0;
@@ -49,7 +49,7 @@
                                                                   background-image: url('/file?name=@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
     }
 }
-<body style="background-image: linear-gradient(to right, rgba(10,10,10, 0.95) 0 100%), url('/file?name=back.gif');
+<body style="background-image: linear-gradient(to right, rgba(0,0,0, 0.95) 0 100%), url('/file?name=back.gif');
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;

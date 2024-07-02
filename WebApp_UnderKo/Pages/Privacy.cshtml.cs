@@ -1,8 +1,9 @@
-﻿using WebApp_UnderKo.Models.RazorPage;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApp_UnderKo.Models.RazorPage;
 
 namespace WebApp_UnderKo.Pages
 {
-    public class PrivacyModel : base_CheckPage
+    public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
 

@@ -39,33 +39,35 @@
         {
             name_ = Regex.Replace(item.Name, "[\\W/+-=]+", "");
 
-            <div class="accordion" id="@(name_)">
 
-                <div class="blured bordeer-tlbr rounded-3 mb-3">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button bordeer-tlbr-bottom text-muted"
-                                style="background-color:transparent" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#@(name_)collapseOne"
-                                aria-expanded="fl" aria-controls="@(name_)collapseOne">
-                            @item.Name
-                        </button>
+            <div class=" container-fluid bordeer-tlbr-bottom pb-1 mb-2">
+                <div class=" py-2 mb-3">
+                    <h1 class="display-6 fw-bold">@item.Name</h1>
+                    <p class="col-md-8 fs-4">@item.Description</p>
 
-                    </h2>
+                    <code style="background:var(--header)" type="text" class="text-muted">
+                        @(item.URL)
+                    </code>
 
-                    <div id="@(name_)collapseOne" class="accordion-collapse " data-bs-parent="#@(name_)">
-                        <div class="accordion-body">
-                            <div class="bordeer-tlbr p-3 rounded-3">
-                                <code style="background:var(--header)" type="text" class="text-muted">
-                                    @(item.URL)
-                                </code>
-                            </div>
 
-                        </div>
-                    </div>
+
+                </div>
+                <div class="d-flex flex-column mb-3">
+                    @foreach (var q in item.reqQueries)
+                    {
+                        <a>@q</a>
+                    }
                 </div>
 
-
+                <button onclick="window.open('@(item.URL)','_blank');" class="btn btn-dark text-muted ps-5 pe-5">
+                    Get
+                </button>
+                <button onclick="unsecuredCopyToClipboard('@(item.URL)')" class="btn btn-dark text-muted ps-5 pe-5">
+                    Copy
+                </button>
             </div>
+
+
         }
 
     }
@@ -84,7 +86,7 @@
 
         <div class="ms-lg-4 mt-5">
             <h4>Смерть от черезмерной мастурбации... </h4>
-             
+
         </div>
         <div class="ms-lg-5 mt-2">
             <h6>By UnderKo</h6>

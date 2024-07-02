@@ -11,7 +11,7 @@
     {
         <button onclick="@(LinkDownload)" style="width:100%" class="btn fs-6 bordeer-tlbr btn-dark  btn-lg  m-1"> @text </button>
     }
-    async Task BackImage(string url, double opacity = 0.5, int blur = 10)
+    async Task BackImage(string url, double opacity = 0.8, int blur = 5)
     {
         // http://localhost:7076/file?name=smdcompile/smdcompile_1.png
         int mar = 0;
@@ -79,7 +79,7 @@
     {
 
         @if (Model.project.Images.Count > 0)
-            await                                                 BackImage(Model.project.Images[0]);
+            await BackImage(Model.project.Images[0] , 0.5 , 5);
         <div class="px-4 mt-5 text-center">
 
             <h1 class="display-5 fw-bold text-body-emphasis">@Model.project.Name</h1>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rijndael256;
 using System.Text.RegularExpressions;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.RazorPage;
 
 namespace WebApp_UnderKo.Components.api
 {
@@ -81,7 +82,7 @@ namespace WebApp_UnderKo.Components.api
         public async Task<IActionResult> SingleFileUpload(IFormFile SingleFile)
         {
 
-
+            this.Init();
             string filename__ = string.Empty;
             string directory = string.Empty;
             FileInfo fileInfo = new FileInfo(SingleFile.FileName);

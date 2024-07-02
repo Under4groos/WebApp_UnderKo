@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApp_UnderKo.Models.RazorPage;
+
 namespace WebApp_UnderKo.Pages
 {
-    public class ConvertersModel : Models.RazorPage.base_CheckPage
+    public class ConvertersModel : PageModel
     {
         public void OnGet()
         {
