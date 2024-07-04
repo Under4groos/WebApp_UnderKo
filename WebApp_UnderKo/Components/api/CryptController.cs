@@ -9,34 +9,39 @@ namespace WebApp_UnderKo.Components.api
     [ApiController]
     public class CryptController : ControllerBase
     {
-
-
-        [HttpGet]
-        public IActionResult Get(string mode, string data, string password = null)
+        [HttpGet("encrypt")]
+        public IActionResult _encrypt(string plaintext, KeySize keySize, string password)
         {
             this.Init();
             //// http://localhost:7076/api/crypt?mode=encrypt&data=12222222&password=1sdfdsf
             try
             {
-                switch (mode.ToLower().Trim())
-                {
-                    case "encrypt":
-                        return Content(Rijndael.Encrypt(data, KeySize.Aes256, password));
-                    case "decrypt":
-                        return Content(Rijndael.Decrypt(data, KeySize.Aes256, password));
-                    default:
-                        return Content("Error");
-
-                }
+                return Content(Rijndael.Encrypt(plaintext, keySize, password));
             }
             catch (Exception e)
             {
+
                 G_.logger.NewLine(e.Message);
-                return Content("Error");
+                return Content($"Error. \n{e}");
             }
-
-
-
         }
+        [HttpGet("decrypt")]
+        public IActionResult _decrypt(string plaintext, KeySize keySize, string password)
+        {
+            this.Init();
+            //// http://localhost:7076/api/crypt?mode=encrypt&data=12222222&password=1sdfdsf
+            try
+            {
+                return Content(Rijndael.Decrypt(plaintext, keySize, password));
+            }
+            catch (Exception e)
+            {
+
+                G_.logger.NewLine(e.Message);
+                return Content($"Error. \n{e}");
+            }
+        }
+
+
     }
 }

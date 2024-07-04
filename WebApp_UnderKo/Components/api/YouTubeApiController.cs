@@ -121,6 +121,7 @@ namespace WebApp_UnderKo.Components.api
                      VideoResolution = $"w:{stream.VideoResolution.Width} h:{stream.VideoResolution.Height}"
                  });
              });
+            objVideoStreamInfos.Reverse();
             StreamInfoList.objVideoStreamInfos = objVideoStreamInfos;
             StreamInfoList.videoId = videoId;
 
