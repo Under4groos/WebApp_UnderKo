@@ -22,7 +22,7 @@ namespace WebApp_UnderKo.Components.api
             {
 
                 G_.logger.NewLine(e.Message);
-                return Content($"Error. \n{e}");
+                return Content($"{e}");
             }
         }
         [HttpGet("decrypt")]
@@ -38,7 +38,7 @@ namespace WebApp_UnderKo.Components.api
             {
 
                 G_.logger.NewLine(e.Message);
-                return Content($"Error. \n{e}");
+                return Content($"{e}");
             }
         }
 

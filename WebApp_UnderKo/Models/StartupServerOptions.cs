@@ -1,6 +1,4 @@
 ﻿using WebApp_UnderKo.Models.IO;
-using WebApp_UnderKo.Models.Serializator.Xaml;
-using WebApp_UnderKo.Models.XamlProjectObject.Project;
 namespace WebApp_UnderKo.Models
 {
     public static class StartupServerOptions
@@ -33,7 +31,7 @@ namespace WebApp_UnderKo.Models
                 }, true).Result)
             {
                 G_.CacheData.xamlProjectsData.__init_null();
-                string xaml_obj_string = new XamlSerializator<XamlProjectsData>().SerializeObject(G_.CacheData.xamlProjectsData);
+                string xaml_obj_string = G_.ProjectsData_Serializator.xaml_XamlProject_Serializator.SerializeObject(G_.CacheData.xamlProjectsData);
                 await InputOutput.PATH_BASE_LocalWriteAsync(@"__myprojects.html", xaml_obj_string);
             };
 
@@ -47,7 +45,7 @@ namespace WebApp_UnderKo.Models
                 }, true).Result)
             {
                 G_.CacheData.apiList.__init_null();
-                string xaml_obj_string = G_.ApiList_Serializator.SerializeObject(G_.CacheData.apiList);
+                string xaml_obj_string = G_.ApiList_Serializator.SerializeObject(G_.CacheData.apiList, Serializator.enumType.xaml);
                 await InputOutput.PATH_BASE_LocalWriteAsync(@"__apilist.html", xaml_obj_string);
             };
 

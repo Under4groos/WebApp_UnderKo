@@ -14,9 +14,12 @@ namespace WebApp_UnderKo.Models.XamlProjectObject.ApiList
                 {
                     Name = Rijndael.Encrypt(G_.Random.Next(0, 999999).ToString(), KeySize.Aes256),
                     URL = $"https://asd.asd/{i}",
-                    reqQueries = new List<string>()
+                    reqQueries = new List<ReqQuery>()
                     {
-                         "13" , "123"
+                         new ReqQuery()
+                         {
+
+                         }
                     }
                 });
             }

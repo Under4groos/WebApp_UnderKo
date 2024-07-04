@@ -5,11 +5,11 @@
 >
   <webApis>
     <WebApi>
-      <URL>https://underko.ru/api/YouTubeApi</URL>
+      <URL
+        >https://underko.ru/api/YouTubeApi?link=https://www.youtube.com/watch?v=X3DCRltnN-g</URL
+      >
       <Name>YouTubeApi</Name>
-      <Description>
-        Получаем ссылки на Аудио, видео и микс файлы с YouTube.
-      </Description>
+      <Description></Description>
       <reqQueries>
         <ReqQuery>
           <Type>string</Type>
@@ -21,18 +21,22 @@
     <WebApi>
       <URL>https://underko.ru/api/projectlist</URL>
       <Name>Project list</Name>
-      <Description>Список проектов.</Description>
+      <Description></Description>
       <reqQueries>
         <ReqQuery>
           <Type>string</Type>
           <Parametr>type (xaml\json)</Parametr>
+        </ReqQuery>
+        <ReqQuery>
+          <Type>int</Type>
+          <Parametr>/number</Parametr>
         </ReqQuery>
       </reqQueries>
     </WebApi>
 
     <WebApi>
       <URL>https://underko.ru/api/crypt/encrypt</URL>
-      <Name>Crypt encrypt</Name>
+      <Name>Crypt</Name>
       <Description></Description>
       string plaintext, KeySize keySize, string password
       <reqQueries>
@@ -52,7 +56,7 @@
     </WebApi>
     <WebApi>
       <URL>https://underko.ru/api/crypt/decrypt</URL>
-      <Name>Crypt decrypt</Name>
+      <Name>Crypt</Name>
       <Description></Description>
       string plaintext, KeySize keySize, string password
       <reqQueries>
@@ -68,6 +72,7 @@
           <Type>string</Type>
           <Parametr>password</Parametr>
         </ReqQuery>
+       
       </reqQueries>
     </WebApi>
   </webApis>

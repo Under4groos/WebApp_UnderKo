@@ -73,7 +73,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown d-none">
                             <a class="nav-link  text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">GitHub</a>
                             <ul class="header dropdown-menu dropdown-menu-d">
                                 @foreach (var item in new (string, string)[] {
@@ -88,7 +88,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown d-none">
                             <a class="nav-link  text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Web Api</a>
                             <ul class="header dropdown-menu dropdown-menu-d">
                                 @foreach (var item in new (string, string)[] {
@@ -119,6 +119,7 @@
                         </li>
                         @foreach (var item in new (string, string)[]
                         {
+                        ("apilist" , "Api"),
                         ("project", "Projects"),
                         ("Storage" , "Storage"),
                         ("Donate" , "Donate"),

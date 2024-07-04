@@ -2,15 +2,15 @@
 @model WebApp_UnderKo.Pages.GitHubProjectsModel
 @{
     ViewData["Title"] = "Projects";
-    
+
     string link_img = "https://i.pinimg.com/736x/e5/1d/d3/e51dd3666f19ba4994a44e66e66a7fd3.jpg";
     int i = 0;
 }
- <head>
+<head>
     @*  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-     <link rel="stylesheet" href="~/WebApplication_Razor.styles.css" asp-append-version="true" />
-     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
- </head>
+    <link rel="stylesheet" href="~/WebApplication_Razor.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+</head>
 
 <style>
     .card-custom {
@@ -44,9 +44,9 @@
             </small>
         </div>
 
-        @foreach (var item in WebApp_UnderKo.Models.G_.git.GitHubReposList )
+        @foreach (WebApp_UnderKo.Models.GitHub.Item item in WebApp_UnderKo.Models.G_.git.GitHubReposList)
         {
-            ++i;
+
             <div class="col mb-3 mt-3 blured">
 
 

@@ -3,7 +3,8 @@
     public class ReqQuery
     {
 
-        public string Parametr { get; set; } = string.Empty;
+        public string Type { get; set; } = "null";
+        public string Parametr { get; set; } = "null";
 
     }
 }
