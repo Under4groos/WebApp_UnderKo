@@ -16,7 +16,7 @@
         // http://localhost:7076/file?name=smdcompile/smdcompile_1.png
         int mar = 0;
         <div style="position: absolute; left: @(mar)px; right: @(mar)px; top: @(mar)px; bottom: @(mar)px;
-                                                              background-image: url('/file?name=@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
+                                                                  background-image: url('/img/@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
     }
 
     async Task YouTubeEmbed(string id)
@@ -127,7 +127,7 @@
                         {
                             <div class="col-md-4">
                                 <div class="card mb-2" style="background: transparent">
-                                    <img src="/img/@(item)" class="card-img-top" style=" width: 100%; display: block;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="...">
+                                    <img src="/files/img/@(item)" class="card-img-top" style=" width: 100%; display: block;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="...">
                                 </div>
                             </div>
                         }

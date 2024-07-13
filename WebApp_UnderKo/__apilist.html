@@ -3,72 +3,80 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
-  <webApis>
-    <WebApi>
-      <URL>https://underko.ru/api/YouTubeApi</URL>
-      <Name>YouTubeApi</Name>
-      <Description>
-        Получаем ссылки на Аудио, видео и микс файлы с YouTube.
-      </Description>
-      <reqQueries>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>link</Parametr>
-        </ReqQuery>
-      </reqQueries>
-    </WebApi>
+    <webApis>
+        <WebApi>
+            <URL>https://underko.ru/files</URL>
+            <Name>Files</Name>
+            <Description></Description>
+            Список файлов на сервере.
+            <reqQueries></reqQueries>
+        </WebApi>
+        <WebApi>
+            <URL>https://underko.ru/api/YouTubeApi</URL>
+            <Name>YouTubeApi</Name>
+            <Description>
+                Получаем ссылки на Аудио, видео и микс файлы с YouTube.
+            </Description>
+            <reqQueries>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>link</Parametr>
+                </ReqQuery>
+            </reqQueries>
+        </WebApi>
 
-    <WebApi>
-      <URL>https://underko.ru/api/projectlist</URL>
-      <Name>Project list</Name>
-      <Description>Список проектов.</Description>
-      <reqQueries>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>type (xaml\json)</Parametr>
-        </ReqQuery>
-      </reqQueries>
-    </WebApi>
+        <WebApi>
+            <URL>https://underko.ru/api/projectlist</URL>
+            <Name>Project list</Name>
+            <Description>Список проектов.</Description>
+            <reqQueries>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>type (xaml\json)</Parametr>
+                </ReqQuery>
+            </reqQueries>
+        </WebApi>
 
-    <WebApi>
-      <URL>https://underko.ru/api/crypt/encrypt</URL>
-      <Name>Crypt encrypt</Name>
-      <Description></Description>
-      string plaintext, KeySize keySize, string password
-      <reqQueries>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>plaintext</Parametr>
-        </ReqQuery>
-        <ReqQuery>
-          <Type>KeySize</Type>
-          <Parametr>keySize (128,192,256)</Parametr>
-        </ReqQuery>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>password</Parametr>
-        </ReqQuery>
-      </reqQueries>
-    </WebApi>
-    <WebApi>
-      <URL>https://underko.ru/api/crypt/decrypt</URL>
-      <Name>Crypt decrypt</Name>
-      <Description></Description>
-      string plaintext, KeySize keySize, string password
-      <reqQueries>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>plaintext</Parametr>
-        </ReqQuery>
-        <ReqQuery>
-          <Type>KeySize</Type>
-          <Parametr>keySize (128,192,256)</Parametr>
-        </ReqQuery>
-        <ReqQuery>
-          <Type>string</Type>
-          <Parametr>password</Parametr>
-        </ReqQuery>
-      </reqQueries>
-    </WebApi>
-  </webApis>
+        <WebApi>
+            <URL>https://underko.ru/api/crypt/encrypt</URL>
+            <Name>Crypt encrypt</Name>
+            <Description></Description>
+            string plaintext, KeySize keySize, string password
+            <reqQueries>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>plaintext</Parametr>
+                </ReqQuery>
+                <ReqQuery>
+                    <Type>KeySize</Type>
+                    <Parametr>keySize (128,192,256)</Parametr>
+                </ReqQuery>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>password</Parametr>
+                </ReqQuery>
+            </reqQueries>
+        </WebApi>
+        <WebApi>
+            <URL>https://underko.ru/api/crypt/decrypt</URL>
+            <Name>Crypt decrypt</Name>
+            <Description></Description>
+            string plaintext, KeySize keySize, string password
+            <reqQueries>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>plaintext</Parametr>
+                </ReqQuery>
+                <ReqQuery>
+                    <Type>KeySize</Type>
+                    <Parametr>keySize (128,192,256)</Parametr>
+                </ReqQuery>
+                <ReqQuery>
+                    <Type>string</Type>
+                    <Parametr>password</Parametr>
+                </ReqQuery>
+            </reqQueries>
+        </WebApi>
+
+    </webApis>
 </ApiList>

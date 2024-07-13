@@ -23,17 +23,7 @@ namespace WebApp_UnderKo.Components.api
                 return new TextResult(new objError($"Processing error", "Link length: 0"));
 
 
-            if (link.StartsWith("https://youtu.be/"))
-            {
-                link = "https://www.youtube.com/watch?v=" + link.Replace("https://youtu.be/", "").Replace("?", "&");
-            }
 
-            if (!link.StartsWith("https://www.youtube.com/watch"))
-            {
-
-                return new TextResult(new objError($"Processing error", "Link invalid"));
-
-            }
 
             try
             {
@@ -60,19 +50,29 @@ namespace WebApp_UnderKo.Components.api
         {
 
 
-            var videoId = VideoId.Parse(link);
-            foreach (var item in G_.CacheData.YouTubeDownloaderLinks)
+            VideoId videoId;
+            try
             {
-                if (item.videoId == videoId)
-                    return item;
+                videoId = VideoId.Parse(link);
+            }
+            catch (Exception)
+            {
+                StreamInfoList.Clear();
+                return StreamInfoList;
+            }
+
+            foreach (var Links in G_.CacheData.YouTubeDownloaderLinks)
+            {
+                if (Links.videoId == videoId)
+                    return Links;
             }
 
 
             var streamManifest = await G_.youtube.Videos.Streams.GetManifestAsync(videoId);
 
             // Muxed ///////////////////////////////////////////////////////////////////////
-            List<objMuxedStreamInfo> objMuxedStreamInfos = new List<objMuxedStreamInfo>();
 
+            List<objMuxedStreamInfo> objMuxedStreamInfos = new List<objMuxedStreamInfo>();
             streamManifest.GetMuxedStreams().OrderBy(p => p.VideoResolution.Area)
              .ToList()
             .ForEach(stream =>

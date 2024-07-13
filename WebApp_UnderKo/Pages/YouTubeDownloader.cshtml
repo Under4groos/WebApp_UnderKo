@@ -24,8 +24,17 @@
                    type="text" name="url" value="@Model.Link" />
         </form>
     </div>
-    @if (Model.YouTubeDownloaderLinks_.objAudioStreamInfos.Count > 0)
+    @if (Model.YouTubeDownloaderLinks_.IsValid())
     {
+        @if(Model.YouTubeDownloaderLinks_.objMuxedStreamInfos.Count > 0)
+        {
+            <div class="justify-content-center m-2">
+                <video style="width:100%" controls="" name="media"><source src="@(Model.YouTubeDownloaderLinks_.objMuxedStreamInfos[0].Url)" type="video/mp4"></video>
+
+            </div>
+           
+        }
+
         <div class="mt-2 blured p-3 bordeer-tlbr rounded-3">
             <div class="mb-3">
                 <h4>MuxedStream</h4>

@@ -15,20 +15,10 @@ namespace WebApp_UnderKo.Pages
             this.Init();
             if (!string.IsNullOrEmpty(link))
             {
-                if (link.StartsWith("https://youtu.be/"))
-                {
-                    link = "https://www.youtube.com/watch?v=" + link.Replace("https://youtu.be/", "").Replace("?", "&");
-                }
-                if (link.StartsWith("https://www.youtube.com/watch"))
-                {
-                    Link = link;
-
-                    YouTubeDownloaderLinks_ = new YouTubeApiController().__get(link).Result;
-
-                }
-
-
+                YouTubeDownloaderLinks_ = new YouTubeApiController().__get(link).Result;
+                Link = link;
             }
+
 
         }
         public ActionResult OnPost(string url)

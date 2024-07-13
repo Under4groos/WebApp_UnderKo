@@ -5,7 +5,7 @@ using WebApp_UnderKo.Models.RazorPage;
 
 namespace WebApp_UnderKo.Components.api
 {
-    [Route("file")]
+    [Route("lfile")]
     [ApiController]
     public class FileController : ControllerBase
     {

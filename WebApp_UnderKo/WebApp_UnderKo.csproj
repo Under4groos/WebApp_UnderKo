@@ -1,29 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		 
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="static\css\site.css" />
-    <Content Include="static\scripts\site.js" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="static\css\site.css" />
+		<Content Include="static\scripts\site.js" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\css\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Properties\PublishProfiles\" />
+		<Folder Include="wwwroot\css\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.9.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.9.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="YoutubeExplode">
-      <HintPath>..\libs\YoutubeExplode.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="YoutubeExplode">
+			<HintPath>..\libs\YoutubeExplode.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
 
 </Project>

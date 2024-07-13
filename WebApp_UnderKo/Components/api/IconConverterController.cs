@@ -93,14 +93,14 @@ namespace WebApp_UnderKo.Components.api
                 if (SingleFile != null && SingleFile.Length > 0)
                 {
 
-                    string base_uploads_directory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                    string base_uploads_directory = Path.Combine(G_.CacheData.PATH_WWWROOT, "uploads");
                     if (!Directory.Exists(base_uploads_directory))
                         Directory.CreateDirectory(base_uploads_directory);
 
 
                     filename__ = FileEncryptName(SingleFile.FileName, fileInfo.Extension);
-
-                    fileInfo = new FileInfo(Path.Combine(base_uploads_directory, filename__));
+                    string dir_uploads = Path.Combine(base_uploads_directory, filename__);
+                    fileInfo = new FileInfo(dir_uploads);
                     if (fileInfo.Exists)
                         fileInfo.Delete();
                     using (var stream = System.IO.File.Create(fileInfo.FullName))
@@ -122,7 +122,7 @@ namespace WebApp_UnderKo.Components.api
 
                 }
             }
-            return this.Redirect($"/Converters/Icon{(System.IO.File.Exists(fileInfo.FullName) ? $"?guid={fileInfo.Name}" : "")}");
+            return this.Redirect($"/Converters/Icon{$"?guid={(fileInfo.Exists ? fileInfo.FullName.Substring(G_.CacheData.PATH_WWWROOT.Length) : "")}"}");
         }
     }
 }
