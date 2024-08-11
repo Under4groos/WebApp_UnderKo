@@ -101,9 +101,17 @@
                     <p class="col-lg-8 mx-auto fs-5 text-white-50">
                         Downloads: <strong class="text-uppercase"> @Model.project.Downloads </strong>
                     </p>
+                    @if (!string.IsNullOrEmpty(Model.project.LastGithubVersion))
+                    {
+                        <p class="col-lg-8 mx-auto fs-5 text-white-50">
+                            Version: <strong class="text-uppercase"> @Model.project.LastGithubVersion </strong>
+                        </p>
+
+                    }
+                    
                 </div>
             }
-
+            
         </div>
         <section class=" py-lg-1 py-1 p-1 mb-3">
             <div class="container my-lg-7 mt-3">

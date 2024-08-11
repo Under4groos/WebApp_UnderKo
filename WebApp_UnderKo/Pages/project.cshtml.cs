@@ -12,6 +12,7 @@ namespace WebApp_UnderKo.Pages
         public string NameProject = string.Empty;
         public XamlProject project { get; set; }
         public List<Button> BUTTONS_TOP = new List<Button>();
+
         public async Task<IActionResult> OnGet(string name = "", bool reopen = false)
         {
 
@@ -29,14 +30,14 @@ namespace WebApp_UnderKo.Pages
                 project = projects_.First();
                 BUTTONS_TOP = project.ButtonsTop;
 
-                if (project.Downloads == 0 && !string.IsNullOrEmpty(project.GitHubLinkReleases))
+                if ((project.Downloads != 0 && !string.IsNullOrEmpty(project.GitHubLinkReleases)) || reopen)
                 {
                     dynamic? obj = await GitApiController.__GetProject(project.GitHubLinkReleases);
 
                     if (obj != null)
                         if (obj[0] != null)
                         {
-
+                            project.LastGithubVersion = obj[0]["tag_name"] ?? string.Empty;
                             string url_zip = obj[0]["assets"][0]["browser_download_url"];
 
                             for (int i = 0; i < BUTTONS_TOP.Count; i++)
@@ -49,7 +50,7 @@ namespace WebApp_UnderKo.Pages
                             //{
                             //    item.Command.Replace("_LINK_GIT_", url_zip);
                             //}
-
+                            project.Downloads = 0;
                             foreach (var asset in obj)
                             {
 

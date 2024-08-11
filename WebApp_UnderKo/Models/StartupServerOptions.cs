@@ -24,15 +24,21 @@ namespace WebApp_UnderKo.Models
 
             /////////////////////////////////////////////////////
             ///
-            if (!InputOutput.PATH_BASE_LocalRead(@"__myprojects.html",
+            if (!InputOutput.PATH_BASE_LocalRead(@"__myprojects.json",
                 (string result) =>
                 {
-                    G_.CacheData.xamlProjectsData = G_.ProjectsData_Serializator.xaml_XamlProject_Serializator.DeserializeObject(result);
+
+                    G_.CacheData.xamlProjectsData = G_.ProjectsData_Serializator.json_XamlProject_Serializator.DeserializeObject(result);
+
+                    //string str_json = G_.ProjectsData_Serializator.json_XamlProject_Serializator.SerializeObject(G_.CacheData.xamlProjectsData);
+                    //str_json = str_json.Replace("\\n", "");
+                    //File.WriteAllText(@"__myprojects.json", str_json);
+
                 }, true).Result)
             {
                 G_.CacheData.xamlProjectsData.__init_null();
-                string xaml_obj_string = G_.ProjectsData_Serializator.xaml_XamlProject_Serializator.SerializeObject(G_.CacheData.xamlProjectsData);
-                await InputOutput.PATH_BASE_LocalWriteAsync(@"__myprojects.html", xaml_obj_string);
+                string xaml_obj_string = G_.ProjectsData_Serializator.json_XamlProject_Serializator.SerializeObject(G_.CacheData.xamlProjectsData);
+                await InputOutput.PATH_BASE_LocalWriteAsync(@"__myprojects.json", xaml_obj_string);
             };
 
             /////////////////////////////////////////////////////
