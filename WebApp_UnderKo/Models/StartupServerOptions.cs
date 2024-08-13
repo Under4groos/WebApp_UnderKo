@@ -28,7 +28,7 @@ namespace WebApp_UnderKo.Models
                 (string result) =>
                 {
 
-                    G_.CacheData.xamlProjectsData = G_.ProjectsData_Serializator.DeserializeObject(result, Serializator.enumType.xaml);
+                    G_.CacheData.xamlProjectsData = G_.ProjectsData_Serializator.DeserializeObject(result, Serializator.enumType.json);
 
                     //string str_json = G_.ProjectsData_Serializator.json_XamlProject_Serializator.SerializeObject(G_.CacheData.xamlProjectsData);
                     //str_json = str_json.Replace("\\n", "");

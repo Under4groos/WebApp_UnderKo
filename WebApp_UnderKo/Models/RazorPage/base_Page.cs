@@ -8,6 +8,11 @@ namespace WebApp_UnderKo.Models.RazorPage
     {
         public static void LogIp(this HttpContext httpContext)
         {
+            if (httpContext == null)
+            {
+                G_.logger.NewLine($"HttpContext: null");
+                return;
+            }
             StringBuilder stringBuilder = new StringBuilder();
             if (httpContext.Request.Headers.ContainsKey("X-Real-IP"))
             {

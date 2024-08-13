@@ -93,6 +93,12 @@
 
                         await button_Button(item.Command, item.Text);
                     }
+                     
+                    @if (!string.IsNullOrEmpty(Model.project.LastGithubVersion))
+                    {
+                        await button_Button($"window.open('/Releases?name={Model.NameProject}','_blank');", "Releases");
+                    }
+                    
                 </div>
             </div>
             @if (Model.project.Downloads > 0)

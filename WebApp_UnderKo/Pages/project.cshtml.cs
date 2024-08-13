@@ -13,13 +13,18 @@ namespace WebApp_UnderKo.Pages
         public XamlProject project { get; set; }
         public List<Button> BUTTONS_TOP = new List<Button>();
 
-        public async Task<IActionResult> OnGet(string name = "", bool reopen = false)
+        public async Task<IActionResult> OnGet(string name = "", bool v = false, bool reopen = false)
         {
 
             this.Init();
 
             NameProject = name;
+            if (v)
+            {
 
+
+
+            }
             if (!string.IsNullOrEmpty(NameProject))
             {
                 var projects_ = (from pro in G_.CacheData.xamlProjectsData.Projects where NameProject == pro.Name select pro);
@@ -30,7 +35,7 @@ namespace WebApp_UnderKo.Pages
                 project = projects_.First();
                 BUTTONS_TOP = project.ButtonsTop;
 
-                if ((project.Downloads != 0 && !string.IsNullOrEmpty(project.GitHubLinkReleases)) || reopen)
+                if (project.Downloads == 0 && !string.IsNullOrEmpty(project.GitHubLinkReleases))
                 {
                     dynamic? obj = await GitApiController.__GetProject(project.GitHubLinkReleases);
 
@@ -46,11 +51,8 @@ namespace WebApp_UnderKo.Pages
                                 if (BUTTONS_TOP[i].Command == "_LINK_GIT_")
                                     BUTTONS_TOP[i].Command = $"window.open('{url_zip}','_blank');";
                             }
-                            //foreach (var item in BUTTONS_TOP)
-                            //{
-                            //    item.Command.Replace("_LINK_GIT_", url_zip);
-                            //}
-                            project.Downloads = 0;
+
+
                             foreach (var asset in obj)
                             {
 

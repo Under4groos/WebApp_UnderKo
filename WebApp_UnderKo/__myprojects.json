@@ -8,6 +8,7 @@
           "Text": "Download",
           "Command": "_LINK_GIT_"
         },
+        
         {
           "Text": "Вопросы? (TG)",
           "Command": "window.open('https://t.me/under4groos','_blank');"
@@ -84,7 +85,12 @@
     {
       "LastGithubVersion": "",
       "JSON_OBJECT_GIT": null,
-      "ButtonsTop": [],
+      "ButtonsTop": [
+        {
+          "Text": "Cкачать",
+          "Command": "window.open('https://underko.ru/files/file/Hookbord.zip','_blank');"
+        }
+      ],
       "Features": [],
       "Name": "Hookbord",
       "Downloads": 0,

@@ -49,11 +49,13 @@
                                                                       background-image: url('/img/@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
     }
 }
-<body style="background-image: linear-gradient(to right, rgba(0,0,0, 0.95) 0 100%), url('/img/back.gif');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      ">
+@* 
+ style="background-image: linear-gradient(to right, rgba(0,0,0, 0.95) 0 100%), url('/img/back.gif');
+       background-position: center;
+       background-repeat: no-repeat;
+       background-size: cover;
+       " *@
+<body style="background: rgb(0,0,0);background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(12,12,12,1) 100%);">
 
    
     <button onclick="document.body.scrollTop = 0;document.documentElement.scrollTop = 0;" class="btn btn-dark button-page-up">
