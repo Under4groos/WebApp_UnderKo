@@ -16,7 +16,7 @@
         // http://localhost:7076/file?name=smdcompile/smdcompile_1.png
         int mar = 0;
         <div style="position: absolute; left: @(mar)px; right: @(mar)px; top: @(mar)px; bottom: @(mar)px;
-                                                                  background-image: url('/img/@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
+                                                                                  background-image: url('/img/@url'); opacity: @(opacity.ToString().Replace("," , ".")); filter:blur(@(blur)px); z-index:-10"></div>
     }
 
     async Task YouTubeEmbed(string id)
@@ -79,7 +79,10 @@
     {
 
         @if (Model.project.Images.Count > 0)
-            await BackImage(Model.project.Images[0] , 0.5 , 5);
+        {
+            await BackImage(Model.project.Images[0], 0.5, 5);
+        }
+        
         <div class="px-4 mt-5 text-center">
 
             <h1 class="display-5 fw-bold text-body-emphasis">@Model.project.Name</h1>
@@ -93,12 +96,12 @@
 
                         await button_Button(item.Command, item.Text);
                     }
-                     
+
                     @if (!string.IsNullOrEmpty(Model.project.LastGithubVersion))
                     {
                         await button_Button($"window.open('/Releases?name={Model.NameProject}','_blank');", "Releases");
                     }
-                    
+
                 </div>
             </div>
             @if (Model.project.Downloads > 0)
@@ -114,26 +117,30 @@
                         </p>
 
                     }
-                    
+
                 </div>
             }
-            
+
         </div>
         <section class=" py-lg-1 py-1 p-1 mb-3">
-            <div class="container my-lg-7 mt-3">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-1 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                            <h2 class="mb-0">Screenshots / Video</h2>
+
+
+            <div class="container">
+                <div class="my-lg-7 mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-1 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                <h2 class="mb-0">Screenshots / Video</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
 
-            @if (Model.project.Images.Count > 0)
-            {
-                <div class="container">
+
+                @if (Model.project.Images.Count > 0)
+                {
+
 
                     <div class="row mt-2" id="li_images">
 
@@ -146,51 +153,43 @@
                             </div>
                         }
                     </div>
-                </div>
-            }
+
+                }
+                @if (Model.project.YouTubeLinks.Count > 0)
+                {
 
 
-
-            @if (Model.project.YouTubeLinks.Count > 0)
-            {
-                 
-                <div class="container">
                     <div class="row mt-2">
                         @foreach (var item in Model.project.YouTubeLinks)
                         {
                             await YouTubeEmbed(item);
                         }
                     </div>
-                </div>
-            }
+
+                }
+                @if (Model.project.Features.Count > 0)
+                {
+                    <div class="my-lg-7 mt-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-5 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                                    <h2 class="mb-0">Достоинства программы</h2>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                @foreach (var item in Model.project.Features)
+                                {
+                                    await Fu(item.Text, item.Description);
+                                }
 
 
-
-
-            @if (Model.project.Features.Count > 0)
-            {
-                <div class=" container my-lg-7 mt-5">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="mb-5 text-center" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-                                <h2 class="mb-0">Достоинства программы</h2>
                             </div>
                         </div>
-
-                        <div class="row">
-
-                            @foreach (var item in Model.project.Features)
-                            {
-                                await Fu(item.Text, item.Description);
-                            }
-
-
-                        </div>
                     </div>
-                </div>
-            }
-
+                }
+            </div>
         </section>
-
     }
 </div>

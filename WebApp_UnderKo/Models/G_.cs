@@ -37,6 +37,10 @@ namespace WebApp_UnderKo.Models
         #endregion
 
 
+        #region console
+
+        public static string HTOP_DataConseole = string.Empty;
+        #endregion
 
 
 

@@ -1,7 +1,15 @@
 using Microsoft.Extensions.FileProviders;
 using WebApp_UnderKo.Models;
 
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+string[] args_ = new string[] { "underko.ru", "test" };
+
+
+
 
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();

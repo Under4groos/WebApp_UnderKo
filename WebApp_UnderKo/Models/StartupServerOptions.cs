@@ -1,4 +1,5 @@
-﻿using WebApp_UnderKo.Models.IO;
+﻿using System.Diagnostics;
+using WebApp_UnderKo.Models.IO;
 namespace WebApp_UnderKo.Models
 {
     public static class StartupServerOptions
@@ -73,10 +74,55 @@ namespace WebApp_UnderKo.Models
             };
 
             G_.git.Init_Profile("Under4groos");
-            G_.git.GetRepositories("Under4groos");
+            //G_.git.GetRepositories("Under4groos");
 
             InputOutput.CreateFolders(G_.CacheData.PATH_WWWROOT, G_.CacheData.OpenDirectories);
 
+
+
+            new Thread(() =>
+            {
+                try
+                {
+                    Process process = new Process();
+                    process.StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = "py \"/home/init.py\"",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true,
+                        RedirectStandardError = true,
+                    };
+
+                    process.Start();
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+
+                    //while (process.StandardOutput.EndOfStream)
+                    //{
+                    //    string output = process.StandardOutput.ReadToEnd();
+                    //    G_.HTOP_DataConseole = output ?? "null";
+                    //}
+                    process.OutputDataReceived += (o, e) =>
+                    {
+
+                        if (string.IsNullOrEmpty(e.Data))
+                            G_.HTOP_DataConseole = "";
+                        G_.HTOP_DataConseole += e.Data ?? "null";
+                    };
+                    process.WaitForExit();
+                }
+                catch (Exception e)
+                {
+                    G_.logger.NewLine($"{e.Message}", Log.ELoggerExtensions.Error);
+                    while (true)
+                    {
+                        Thread.Sleep(1500);
+                        G_.HTOP_DataConseole = G_.Random.Next(0, 999).ToString();
+                    }
+
+                }
+            }).Start();
 
 
             return false;
