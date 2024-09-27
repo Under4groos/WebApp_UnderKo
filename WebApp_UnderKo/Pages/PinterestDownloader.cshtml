@@ -1,0 +1,28 @@
+﻿@page
+@model WebApp_UnderKo.Pages.PinterestDownloaderModel
+@{
+}
+
+
+<div class="m-3 pb-3">
+    <div width="100%" class="pb-3 blured p-3 bordeer-tlbr rounded-3">
+        <form method="post">
+            <h4>Link pinterest</h4>
+            <input class="form-control rounded text-muted bordeer-tlbr"
+                   style="background-color: #1f1f1f33;"
+                   type="text" name="url" value="https://ru.pinterest.com/pin/362539838770181124/" />
+        </form>
+    </div>
+    @if (Model.LinksVideo.Count() > 0)
+    {
+      
+        <div class="justify-content-center m-2">
+            @foreach (var item in Model.LinksVideo)
+            {
+                <video style="width:50%" controls="" name="media"><source src="@(item)" type="video/mp4"></video>
+
+            }
+
+        </div>
+    }
+</div>

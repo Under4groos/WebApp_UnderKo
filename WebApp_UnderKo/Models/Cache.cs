@@ -18,7 +18,7 @@ namespace WebApp_UnderKo.Models
            {
                 "uploads" , "video" , "file" , "img"
            };
-
+        public Pinterest Pinterest = new Pinterest();
 
 
         public Dictionary<string, string> Images = new Dictionary<string, string>();

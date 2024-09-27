@@ -58,6 +58,17 @@ namespace WebApp_UnderKo.Models
 
             /////////////////////////////////////////////////////
 
+            if (!InputOutput.PATH_BASE_LocalRead(@"__Pinterest.txt",
+                (string result) =>
+                {
+                    G_.CacheData.Pinterest.cookie = result;
+
+                }, true).Result)
+            {
+
+
+                await InputOutput.PATH_BASE_LocalWriteAsync(@"__Pinterest.txt", "<null>");
+            };
 
 
 
