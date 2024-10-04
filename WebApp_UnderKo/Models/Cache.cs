@@ -24,7 +24,7 @@ namespace WebApp_UnderKo.Models
         public Dictionary<string, string> Images = new Dictionary<string, string>();
         public Dictionary<string, string> Sound = new Dictionary<string, string>();
         public List<string> LogData = new List<string>();
-        public List<YouTubeDownloaderLinks> YouTubeDownloaderLinks = new List<YouTubeDownloaderLinks>();
+        public Dictionary<string, YouTubeDownloaderLinks> DictionaryYouTubeDownloaderLinks = new Dictionary<string, YouTubeDownloaderLinks>();
 
 
 

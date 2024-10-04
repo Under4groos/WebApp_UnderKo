@@ -1,36 +1,99 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoLibrary;
 using WebApp_UnderKo.Models;
+using WebApp_UnderKo.Models.Mvc;
 using WebApp_UnderKo.Models.Mvc.Result;
 using WebApp_UnderKo.Models.RazorPage;
-using WebApp_UnderKo.Models.Serializator.Json;
 using WebApp_UnderKo.Models.YouTube;
-using YoutubeExplode.Videos;
-
 
 namespace WebApp_UnderKo.Components.api
 {
+
     [Route("api/YouTubeApi")]
     [ApiController]
-    public class YouTubeApiController : ControllerBase
+    public class YouTubeApiController : OverControllerBase
     {
-        YouTubeDownloaderLinks StreamInfoList = new YouTubeDownloaderLinks();
 
+        private HttpClient _client = new HttpClient();
+        YouTube youTube = YouTube.Default;
         [HttpGet()]
-        public ActionResult Get(string link = null)
+        public async Task<ActionResult> Get(int v = 1, string link = null)
         {
             this.Init();
             if (string.IsNullOrEmpty(link))
-                return new TextResult(new objError($"Processing error", "Link length: 0"));
-
-
-
+                return this.SerializeObject("error");
+            string base___ = G_.CacheData.PATH_WWWROOT_FILES;
 
             try
             {
-                YouTubeDownloaderLinks list_ = __get(link).Result;
 
-                return Content(new JsonSerializator<YouTubeDownloaderLinks>().SerializeObject(list_));
+                var links = await __get(link);
+                if (links.LinksYouTubeVideo.Count > 0 || links.LinksYouTubeVideoAudio.Count > 0)
+                    switch (v)
+                    {
+                        case 1:
+                            return this.SerializeObject(links);
+                        case 2:
 
+                            var video = links.LinksYouTubeVideo.First();
+
+                            var s = await _client.GetStreamAsync(video.Uri);
+                            this.File(s, "video/mp4");
+
+                            return Ok(s);
+                        case 3:
+                            var audio = links.LinksYouTubeVideoAudio.First();
+                            var a = await _client.GetStreamAsync(audio.Uri);
+                            this.File(a, "audio/mpeg");
+
+                            return Ok(a);
+                        default:
+                            return NoContent();
+
+                    }
+
+
+                #region hide
+                //if (isone)
+                //{
+                //    if (links.LinksYouTubeVideo.Count > 0 || links.LinksYouTubeVideoAudio.Count > 0)
+                //    {
+                //        var video = links.LinksYouTubeVideo.First();
+                //        var audio = links.LinksYouTubeVideoAudio.First();
+                //        string video_path_ = $"{G_.RandomGenerateHEX}.mp4";
+                //        string audio_path_ = $"{G_.RandomGenerateHEX}.mp3";
+
+                //        video_path_ = Path.Combine(base___, video_path_);
+                //        audio_path_ = Path.Combine(base___, audio_path_);
+
+
+
+                //        var data = video.GetBytesAsync();
+                //        byte[] arr_ = data.Result;
+                //        System.IO.File.WriteAllBytes(video_path_, arr_);
+
+                //        Console.WriteLine(video_path_);
+
+                //        data = audio.GetBytesAsync();
+                //        arr_ = data.Result;
+                //        System.IO.File.WriteAllBytes(audio_path_, arr_);
+
+                //        Console.WriteLine(audio_path_);
+
+                //        string marge_path_ = Path.Combine(base___, $"{G_.RandomGenerateHEX}.mp4");
+                //        StreamMerge.Merge(video_path_, audio_path_, Path.Combine(base___, marge_path_));
+
+                //        return this.SerializeObject(new { marge_path_, video_path_, audio_path_ });
+                //    }
+
+
+                //    return this.SerializeObject(new { });
+                //} 
+                #endregion
+
+
+
+                _client.Dispose();
             }
             catch (Exception e)
             {
@@ -38,96 +101,46 @@ namespace WebApp_UnderKo.Components.api
                 return new TextResult(new objError($"Processing error", e.Message));
             }
 
-            // || link.StartsWith("https://youtu.be")
-            // https://www.youtube.com/watch?v=KoKDad4Uq9o&list=RDn176EOKDLtg&index=4
-            // https://youtu.be/KoKDad4Uq9o?list=RDn176EOKDLtg
-            // https://www.youtube.com/watch?v=n176EOKDLtg&list=RDn176EOKDLtg
 
+            return this.SerializeObject("opps///");
         }
+
 
 
         public async Task<YouTubeDownloaderLinks> __get(string link)
         {
+            if (G_.CacheData.DictionaryYouTubeDownloaderLinks.ContainsKey(link))
+                return G_.CacheData.DictionaryYouTubeDownloaderLinks[link];
 
+            var video = youTube.GetAllVideos(link);
 
-            VideoId videoId;
-            try
+            YouTubeDownloaderLinks youTubeDownloaderLinks = new YouTubeDownloaderLinks();
+
+            foreach (YouTubeVideo item in video)
             {
-                videoId = VideoId.Parse(link);
-            }
-            catch (Exception)
-            {
-                StreamInfoList.Clear();
-                return StreamInfoList;
-            }
-
-            foreach (var Links in G_.CacheData.YouTubeDownloaderLinks)
-            {
-                if (Links.videoId == videoId)
-                    return Links;
-            }
-
-
-            var streamManifest = await G_.youtube.Videos.Streams.GetManifestAsync(videoId);
-
-            // Muxed ///////////////////////////////////////////////////////////////////////
-
-            List<objMuxedStreamInfo> objMuxedStreamInfos = new List<objMuxedStreamInfo>();
-            streamManifest.GetMuxedStreams().OrderBy(p => p.VideoResolution.Area)
-             .ToList()
-            .ForEach(stream =>
-            {
-
-                objMuxedStreamInfos.Add(new objMuxedStreamInfo()
+                switch (item.AdaptiveKind)
                 {
-                    Url = stream.Url,
-                    Size = stream.Size.MegaBytes.ToString(),
-                    AudioCodec = stream.AudioCodec,
-                    VideoCodec = stream.VideoCodec,
-                    Framerate = stream.VideoQuality.Framerate.ToString(),
-                    VideoQuality = stream.VideoQuality.Label,
-                    VideoResolution = $"w:{stream.VideoResolution.Width} h:{stream.VideoResolution.Height}"
-                });
-            });
-            StreamInfoList.objMuxedStreamInfos = objMuxedStreamInfos;
+                    case AdaptiveKind.None:
+                        youTubeDownloaderLinks.LinksYouTubeVideoNone.Add(item);
+                        break;
+                    case AdaptiveKind.Audio:
+                        youTubeDownloaderLinks.LinksYouTubeVideoAudio.Add(item);
+                        break;
+                    case AdaptiveKind.Video:
 
-            // Audio ///////////////////////////////////////////////////////////////////////
-            List<objAudioStreamInfo> objAudioStreamInfos = new List<objAudioStreamInfo>();
-            streamManifest.GetAudioStreams().OrderBy(p => p.Bitrate.BitsPerSecond)
-             .ToList().ForEach(stream =>
-             {
-                 objAudioStreamInfos.Add(new objAudioStreamInfo()
-                 {
-                     Url = stream.Url,
-                     AudioCodec = stream.AudioCodec,
-                     Size = stream.Size.MegaBytes.ToString(),
-                     Bitrate = stream.Bitrate.BitsPerSecond.ToString(),
+                        youTubeDownloaderLinks.LinksYouTubeVideo.Add(item);
+                        break;
+                    default:
+                        break;
+                }
 
-                 });
-             });
-            StreamInfoList.objAudioStreamInfos = objAudioStreamInfos;
-            // Video ///////////////////////////////////////////////////////////////////////
-            List<objVideoStreamInfo> objVideoStreamInfos = new List<objVideoStreamInfo>();
-            streamManifest.GetVideoStreams().OrderBy(p => p.VideoResolution.Area)
-             .ToList().ForEach(stream =>
-             {
-                 objVideoStreamInfos.Add(new objVideoStreamInfo()
-                 {
-                     Url = stream.Url,
-                     Size = stream.Size.MegaBytes.ToString(),
-                     Framerate = stream.VideoQuality.Framerate.ToString(),
-                     VideoCodec = stream.VideoCodec,
-                     VideoQuality = stream.VideoQuality.Label,
-                     VideoResolution = $"w:{stream.VideoResolution.Width} h:{stream.VideoResolution.Height}"
-                 });
-             });
-            objVideoStreamInfos.Reverse();
-            StreamInfoList.objVideoStreamInfos = objVideoStreamInfos;
-            StreamInfoList.videoId = videoId;
+            }
 
-            G_.CacheData.YouTubeDownloaderLinks.Add(StreamInfoList);
+            G_.CacheData.DictionaryYouTubeDownloaderLinks.Add(link, youTubeDownloaderLinks);
 
-            return StreamInfoList;
+
+
+            return youTubeDownloaderLinks;
         }
     }
 }

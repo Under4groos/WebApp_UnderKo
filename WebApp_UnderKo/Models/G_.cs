@@ -5,7 +5,6 @@ using WebApp_UnderKo.Models.GitHub;
 using WebApp_UnderKo.Models.Serializator;
 using WebApp_UnderKo.Models.XamlProjectObject.ApiList;
 using WebApp_UnderKo.Models.XamlProjectObject.Project;
-using YoutubeExplode;
 
 namespace WebApp_UnderKo.Models
 {
@@ -22,7 +21,7 @@ namespace WebApp_UnderKo.Models
             }
         }
 
-        public static YoutubeClient youtube = new YoutubeClient();
+
         public static Cache CacheData = new Cache();
         public static Log.Logger logger = new Log.Logger();
         public static Git git = new Git();

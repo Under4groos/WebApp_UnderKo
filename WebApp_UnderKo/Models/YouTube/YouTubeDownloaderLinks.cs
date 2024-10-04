@@ -1,4 +1,6 @@
-﻿using YoutubeExplode.Videos;
+﻿
+using VideoLibrary;
+
 namespace WebApp_UnderKo.Models.YouTube
 {
     public struct YouTubeDownloaderLinks
@@ -7,26 +9,20 @@ namespace WebApp_UnderKo.Models.YouTube
         {
         }
 
-        public VideoId videoId;
-        public DateTime PostDateTime;
-        public List<objMuxedStreamInfo> objMuxedStreamInfos = new List<objMuxedStreamInfo>();
-        public List<objAudioStreamInfo> objAudioStreamInfos = new List<objAudioStreamInfo>();
-        public List<objVideoStreamInfo> objVideoStreamInfos = new List<objVideoStreamInfo>();
 
+        public List<YouTubeVideo> LinksYouTubeVideo = new List<YouTubeVideo>();
+        public List<YouTubeVideo> LinksYouTubeVideoAudio = new List<YouTubeVideo>();
+        public List<YouTubeVideo> LinksYouTubeVideoNone = new List<YouTubeVideo>();
         public bool IsValid()
         {
-            return objMuxedStreamInfos.Count > 0 || objAudioStreamInfos.Count > 0 || objVideoStreamInfos.Count > 0;
+            return (LinksYouTubeVideo.Count > 0 || LinksYouTubeVideoAudio.Count > 0 || LinksYouTubeVideoNone.Count > 0);
         }
 
-        public void UpdateTime()
-        {
-            PostDateTime = DateTime.Now;
-        }
+
         public void Clear()
         {
-            objMuxedStreamInfos.Clear();
-            objAudioStreamInfos.Clear();
-            objVideoStreamInfos.Clear();
+            LinksYouTubeVideo.Clear();
+            LinksYouTubeVideoAudio.Clear();
         }
     }
 }

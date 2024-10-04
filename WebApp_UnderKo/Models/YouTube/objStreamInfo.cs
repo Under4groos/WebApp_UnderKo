@@ -19,6 +19,12 @@
         public string AudioCodec { get; set; }
 
     }
+    public class objStreamInfo()
+    {
+
+        public string Url { get; set; }
+
+    }
     public class objVideoStreamInfo()
     {
 
