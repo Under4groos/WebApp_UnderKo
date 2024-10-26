@@ -17,6 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Models\Log\" />
 		<Folder Include="Properties\PublishProfiles\" />
 		<Folder Include="wwwroot\css\" />
 	</ItemGroup>

@@ -53,7 +53,7 @@ namespace WebApp_UnderKo.Components.api
 
 
 
-                        G_.logger.NewLine($"Resize Image: {image.Width}x{image.Height}", Models.Log.ELoggerExtensions.Debug);
+                        G_.logger.NewLine($"Resize Image: {image.Width}x{image.Height}", Log.ELoggerExtensions.Debug);
 
 
                     }
@@ -69,7 +69,7 @@ namespace WebApp_UnderKo.Components.api
             catch (Exception e)
             {
 
-                G_.logger.NewLine(e.Message, Models.Log.ELoggerExtensions.Error);
+                G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
 
                 return e.Message;
             }
@@ -112,7 +112,7 @@ namespace WebApp_UnderKo.Components.api
                         catch (Exception e)
                         {
 
-                            G_.logger.NewLine(e.Message, Models.Log.ELoggerExtensions.Error);
+                            G_.logger.NewLine(e.Message, Log.ELoggerExtensions.Error);
                         }
 
                     }

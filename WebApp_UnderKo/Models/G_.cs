@@ -8,6 +8,7 @@ using WebApp_UnderKo.Models.XamlProjectObject.Project;
 
 namespace WebApp_UnderKo.Models
 {
+   
     public static class G_
     {
         public static Random Random = new Random();
