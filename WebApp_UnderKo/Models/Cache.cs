@@ -30,7 +30,7 @@ namespace WebApp_UnderKo.Models
 
         public ApiList apiList = new ApiList();
         public XamlProjectsData xamlProjectsData = new XamlProjectsData();
-
+        public List<string> IPController_ListIP = new List<string>();
 
         public Cache()
         {
